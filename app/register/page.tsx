@@ -35,7 +35,7 @@ const genderOptions = [
 
 const Register = () => {
   const methods = useForm({});
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
   const [isImageUploading, setIsImageUploading] = useState(false);
   const [selectedProfilePicture, setSelectedProfilePicture] =
     useState<File | null>(null);
@@ -93,6 +93,8 @@ const Register = () => {
     };
 
     console.log(userData);
+
+    reset();
   };
 
   return (
@@ -198,7 +200,7 @@ const Register = () => {
                   className="w-full bg-primary hover:bg-primaryLight mt-6"
                   type="submit"
                 >
-                  Register
+                  {isImageUploading ? "Registering" : "Register"}
                 </Button>
               </form>
             </FormProvider>
