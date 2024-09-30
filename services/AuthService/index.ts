@@ -1,7 +1,7 @@
 "use server";
 
 import { axiosInstance } from "@/lib/AxiosInstance";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
@@ -20,8 +20,8 @@ export const loginUser = async (userData: FieldValues) => {
     const { data } = await axiosInstance.post("/auth/login", userData);
 
     if (data.success) {
-      cookies().set("accessToken", data?.data?.accessToken);
-      cookies().set("refreshToken", data?.data?.refreshToken);
+      cookies().set("accessToken", data?.token?.accessToken);
+      cookies().set("refreshToken", data?.token?.refreshToken);
     }
 
     return data;
@@ -35,13 +35,20 @@ export const logout = async () => {
   cookies().delete("refreshToken");
 };
 
+interface CustomJwtPayload extends JwtPayload {
+  profilePicture?: string;
+  id: string;
+  email: string;
+} 
+
+
 export const currentUser = async () => {
   const accessToken = cookies().get("accessToken")?.value;
 
-  let decoded = null;
+  let decoded: CustomJwtPayload | null = null;
 
   if (accessToken) {
-    decoded = jwtDecode(accessToken);
+    decoded = jwtDecode<CustomJwtPayload>(accessToken);
   }
 
   return decoded;

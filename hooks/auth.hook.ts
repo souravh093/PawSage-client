@@ -8,7 +8,6 @@ export const useRegistration = () => {
     mutationKey: ["register"],
     mutationFn: async (userData) => await registerUser(userData),
     onSuccess: (data) => {
-      console.log(data);
       toast.success(data.message || "Registration successful");
     },
     onError: (error: any) => {
@@ -22,7 +21,8 @@ export const useLogin = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["login"],
     mutationFn: async (userData) => await loginUser(userData),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data)
       toast.success("Login successful");
     },
     onError: (error) => {

@@ -12,6 +12,7 @@ import {
 } from "react-hook-form";
 import PWInput from "@/components/form/PWInput";
 import { useLogin } from "@/hooks/auth.hook";
+import { Spinner } from "@nextui-org/spinner";
 
 const Login = () => {
   const { mutate: handleLogin, isPending } = useLogin();
@@ -24,6 +25,7 @@ const Login = () => {
 
     reset();
   };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-green-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -58,7 +60,7 @@ const Login = () => {
                   className="w-full bg-primary hover:bg-primaryLight"
                   type="submit"
                 >
-                  Log in
+                  {isPending ? <Spinner /> : "Login"}
                 </Button>
               </form>
             </FormProvider>
