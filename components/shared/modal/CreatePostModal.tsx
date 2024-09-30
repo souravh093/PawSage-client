@@ -1,17 +1,23 @@
 "use client";
+import dynamic from "next/dynamic";
 
+// Dynamically import ReactQuillEditor with SSR disabled
+const ReactQuillEditor = dynamic(
+  () => import("@/components/shared/ReactQuill/ReactQuillEditor"),
+  {
+    ssr: false,
+  }
+);
 import { Button } from "@nextui-org/button";
 import {
   Modal,
   ModalBody,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/modal";
-import { Plus, X } from "lucide-react";
+import { BadgeCheck, Plus, X } from "lucide-react";
 import React, { useRef, useState } from "react";
-import ReactQuillEditor from "../ReactQuill/ReactQuillEditor";
 import {
   FieldValues,
   FormProvider,
@@ -23,6 +29,8 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/firebase/firebase.config";
 import Image from "next/image";
 import { usePost } from "@/hooks/post.hook";
+import PWSelect from "@/components/form/PWSelect";
+import { Spinner } from "@nextui-org/spinner";
 
 const CreatePostModal = ({ userId }: { userId: string }) => {
   const { mutate: handlePost, isPending, isSuccess } = usePost();
@@ -91,25 +99,16 @@ const CreatePostModal = ({ userId }: { userId: string }) => {
         : null,
       userId,
     };
-    console.log(postData);
 
     await handlePost(postData);
 
-    reset();
-    setPreviewUrl(null);
-    setContent("");
+    if (!isPending) {
+      reset();
+      setPreviewUrl(null);
+      setContent("");
+      onOpenChange();
+    }
   };
-
-  //   export type TPost = {
-  //     _id: string;
-  //     title: string;
-  //     thumbnail: string;
-  //     category: TPostCategory;
-  //     content: string;
-  //     userId: Types.ObjectId;
-  //     likes?: number;
-  //     isPremium?: boolean;
-  //   };
 
   return (
     <>
@@ -122,14 +121,24 @@ const CreatePostModal = ({ userId }: { userId: string }) => {
       </Button>
       <Modal size="3xl" isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex justify-between items-center">
                 Modal Title
               </ModalHeader>
-              <ModalBody className="overflow-y-auto max-h-[500px]">
+              <ModalBody className="overflow-y-auto max-h-[600px]">
                 <FormProvider {...methods}>
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    <div className="space-y-2">
+                      <PWSelect
+                        label="Category"
+                        name="category"
+                        options={[
+                          { key: "Tip", label: "Tip" },
+                          { key: "Story", label: "Story" },
+                        ]}
+                      />
+                    </div>
                     <div className="space-y-2">
                       <PWInput
                         type="text"
@@ -163,7 +172,7 @@ const CreatePostModal = ({ userId }: { userId: string }) => {
                           className="flex h-14 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-default-200 text-default-500 shadow-sm transition-all duration-100 hover:border-default-400"
                           htmlFor="image"
                         >
-                          Upload Profile Picture (Optional)
+                          Upload Image
                         </label>
 
                         <input
@@ -188,19 +197,11 @@ const CreatePostModal = ({ userId }: { userId: string }) => {
                       className="w-full bg-primary hover:bg-primaryLight"
                       type="submit"
                     >
-                      Post
+                      {isPending ? <Spinner /> : "Post Now"}
                     </Button>
                   </form>
                 </FormProvider>
               </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
-                </Button>
-              </ModalFooter>
             </>
           )}
         </ModalContent>

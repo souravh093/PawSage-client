@@ -1,11 +1,8 @@
-"use client"
-
-import React from "react";
+// components/EditorToolBar.tsx
+import React, { useEffect } from "react";
 import { Quill } from "react-quill";
 
-// Custom Undo button icon component for Quill editor. You can import it directly
-// from 'quill/assets/icons/undo.svg' but I found that a number of loaders do not
-// handle them correctly
+// Custom Undo button icon component for Quill editor
 const CustomUndo: React.FC = () => (
   <svg viewBox="0 0 18 18">
     <polygon className="ql-fill ql-stroke" points="6 10 4 12 2 10 6 10" />
@@ -35,45 +32,26 @@ function redoChange(this: any) {
   this.quill.history.redo();
 }
 
-// Add sizes to whitelist and register them
-const Size = Quill.import("formats/size");
-Size.whitelist = ["extra-small", "small", "medium", "large"];
-Quill.register(Size, true);
-
-// Add fonts to whitelist and register them
-const Font = Quill.import("formats/font");
-Font.whitelist = [
-  "arial",
-  "comic-sans",
-  "courier-new",
-  "georgia",
-  "helvetica",
-  "Inter",
-  "lucida"
-];
-Quill.register(Font, true);
-
+// Modules for Quill editor
 interface ModulesProps {
   toolbarId: string;
 }
 
-// Modules object for setting up the Quill editor
 export const modules = (props: ModulesProps) => ({
   toolbar: {
-    container: "#" + props.toolbarId,
+    container: `#${props.toolbarId}`,
     handlers: {
       undo: undoChange,
-      redo: redoChange
-    }
+      redo: redoChange,
+    },
   },
   history: {
     delay: 500,
     maxStack: 100,
-    userOnly: true
-  }
+    userOnly: true,
+  },
 });
 
-// Formats objects for setting up the Quill editor
 export const formats = [
   "header",
   "font",
@@ -93,7 +71,7 @@ export const formats = [
   "image",
   "video",
   "color",
-  "code-block"
+  "code-block",
 ];
 
 interface QuillToolbarProps {
@@ -101,7 +79,27 @@ interface QuillToolbarProps {
 }
 
 // Quill Toolbar component
-export const QuillToolbar: React.FC<QuillToolbarProps> = ({ toolbarId }) => {
+export const EditorToolBar: React.FC<QuillToolbarProps> = ({ toolbarId }) => {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const Size = Quill.import("formats/size");
+      Size.whitelist = ["extra-small", "small", "medium", "large"];
+      Quill.register(Size, true);
+
+      const Font = Quill.import("formats/font");
+      Font.whitelist = [
+        "arial",
+        "comic-sans",
+        "courier-new",
+        "georgia",
+        "helvetica",
+        "Inter",
+        "lucida",
+      ];
+      Quill.register(Font, true);
+    }
+  }, []);
+
   return (
     <>
       {toolbarId !== undefined && (
@@ -114,7 +112,7 @@ export const QuillToolbar: React.FC<QuillToolbarProps> = ({ toolbarId }) => {
           </span>
           <span className="ql-formats">
             <select className="ql-font">
-              <option value="arial"> Arial </option>
+              <option value="arial">Arial</option>
               <option value="comic-sans">Comic Sans</option>
               <option value="courier-new">Courier New</option>
               <option value="georgia">Georgia</option>
@@ -185,4 +183,4 @@ export const QuillToolbar: React.FC<QuillToolbarProps> = ({ toolbarId }) => {
   );
 };
 
-export default QuillToolbar;
+export default EditorToolBar;

@@ -6,6 +6,7 @@ const Feed = async () => {
   return (
     <div>
       <CreatePost />
+      
     </div>
   )
 }

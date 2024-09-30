@@ -11,8 +11,7 @@ export const usePost = () => {
       toast.success(data.message || "Registration successful");
     },
     onError: (error: any) => {
-      console.error("Error response: ", error);
-      toast.error(error.response?.data?.message || "Registration failed");
+      toast.error("Registration failed");
     },
   });
 };
