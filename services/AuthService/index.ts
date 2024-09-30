@@ -35,10 +35,11 @@ export const logout = async () => {
   cookies().delete("refreshToken");
 };
 
-interface CustomJwtPayload extends JwtPayload {
+export interface CustomJwtPayload extends JwtPayload {
   profilePicture?: string;
   id: string;
   email: string;
+
 } 
 
 

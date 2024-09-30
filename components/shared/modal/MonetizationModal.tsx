@@ -16,7 +16,7 @@ export default function MonetizationModal() {
     <>
       <Button
         onPress={onOpen}
-        className="bg-green-400 text-white"
+        className="bg-primary text-white"
         endContent={<BadgeCheck />}
       >
         On Monetization
