@@ -29,7 +29,7 @@ const PWSelect = ({
       {...register(name)}
       isDisabled={isDisabled}
     >
-      {options.map((option) => (
+      {options.map((option, index) => (
         <SelectItem key={option.key}>{option.label}</SelectItem>
       ))}
     </Select>

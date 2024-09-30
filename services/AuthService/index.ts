@@ -1,19 +1,21 @@
+"use server";
+
 import { axiosInstance } from "@/lib/AxiosInstance";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
-export const register = async (userData: FieldValues) => {
+export const registerUser = async (userData: FieldValues) => {
   try {
     const { data } = await axiosInstance.post("/auth/signup", userData);
 
     return data;
   } catch (error: any) {
-    throw new Error(error);
+    throw new Error(error.response?.data || error.message);
   }
 };
 
-export const login = async (userData: FieldValues) => {
+export const loginUser = async (userData: FieldValues) => {
   try {
     const { data } = await axiosInstance.post("/auth/login", userData);
 

@@ -11,14 +11,16 @@ import {
   useForm,
 } from "react-hook-form";
 import PWInput from "@/components/form/PWInput";
+import { useLogin } from "@/hooks/auth.hook";
 
 const Login = () => {
+  const { mutate: handleLogin, isPending } = useLogin();
   const methods = useForm();
 
   const { handleSubmit, reset } = methods;
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    await handleLogin(data);
 
     reset();
   };

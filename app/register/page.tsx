@@ -5,11 +5,14 @@ import PWSelect from "@/components/form/PWSelect";
 import PWTextarea from "@/components/form/PWTextarea";
 import Logo from "@/components/shared/Logo";
 import { storage } from "@/firebase/firebase.config";
+import { useRegistration } from "@/hooks/auth.hook";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
+import { Spinner } from "@nextui-org/spinner";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { X } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import {
   FieldValues,
@@ -34,6 +37,9 @@ const genderOptions = [
 ];
 
 const Register = () => {
+  const { mutate: handleRegister, isPending } = useRegistration();
+
+  const router = useRouter();
   const methods = useForm({});
   const { handleSubmit, reset } = methods;
   const [isImageUploading, setIsImageUploading] = useState(false);
@@ -92,9 +98,11 @@ const Register = () => {
       profilePicture,
     };
 
-    console.log(userData);
+    await handleRegister(userData);
 
+    router.push("/login");
     reset();
+    setPreviewUrl(null);
   };
 
   return (
@@ -200,7 +208,7 @@ const Register = () => {
                   className="w-full bg-primary hover:bg-primaryLight mt-6"
                   type="submit"
                 >
-                  {isImageUploading ? "Registering" : "Register"}
+                  {isPending ? <Spinner /> : "Register"}
                 </Button>
               </form>
             </FormProvider>
