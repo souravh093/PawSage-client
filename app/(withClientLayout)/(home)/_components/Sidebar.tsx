@@ -1,36 +1,47 @@
-"use client";
-
+import Followers from "@/components/shared/Followers";
+import { currentUser } from "@/services/AuthService";
+import { getPremiumPosts } from "@/services/FetchPosts";
+import { getUsers } from "@/services/User/indext";
 import { Avatar } from "@nextui-org/avatar";
-import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
-import { ImageIcon } from "lucide-react";
-import React from "react";
+import Image from "next/image";
 
-const Sidebar = () => {
+const Sidebar = async () => {
+  const { data } = await getUsers();
+  const userData = await currentUser();
+  const { data: premiumPosts } = await getPremiumPosts();
+  console.log(premiumPosts);
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-5">
       <div className="w-full space-y-6">
-        {/* Random Users to Follow */}
         <Card>
           <CardHeader>
             <h1>Who to Follow</h1>
           </CardHeader>
           <CardBody>
             <div className="space-y-4">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <Avatar src={`https://i.pravatar.cc/40?img=${i}`} />
-                    <div>
-                      <p className="font-medium">User {i + 1}</p>
-                      <p className="text-sm text-gray-500">@user{i + 1}</p>
+              {data.map(
+                ({
+                  _id,
+                  profilePicture,
+                  email,
+                }: {
+                  _id: string;
+                  profilePicture: string;
+                  email: string;
+                }) => (
+                  <div key={_id} className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <Avatar src={profilePicture || ""} />
+                      <div>
+                        <p className="font-medium">User </p>
+                        <p className="text-sm text-gray-500">{email}</p>
+                      </div>
                     </div>
+                    <Followers userData={userData} userId={_id} />
                   </div>
-                  <Button variant="bordered" size="sm">
-                    Follow
-                  </Button>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </CardBody>
         </Card>
@@ -42,19 +53,35 @@ const Sidebar = () => {
         </CardHeader>
         <CardBody>
           <div className="space-y-4">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="flex items-center space-x-3">
-                <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center">
-                  <ImageIcon className="text-gray-400" size={24} />
+            {premiumPosts?.result?.map(
+              ({
+                _id,
+                title,
+                thumbnail,
+              }: {
+                _id: string;
+                title: string;
+                thumbnail: string;
+              }) => (
+                <div key={_id} className="flex items-center space-x-3">
+                  <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center">
+                    <Image
+                      src={thumbnail}
+                      alt={title}
+                      className="w-[64px] h-[64px] object-cover rounded-md"
+                      width={64}
+                      height={64}
+                    />
+                  </div>
+                  <div>
+                    <p className="font-medium">{title}</p>
+                    <p className="text-sm text-gray-500">
+                      Exclusive content for members
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-medium">Premium Tip #{i + 1}</p>
-                  <p className="text-sm text-gray-500">
-                    Exclusive content for members
-                  </p>
-                </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </CardBody>
       </Card>

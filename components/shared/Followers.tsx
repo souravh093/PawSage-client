@@ -57,10 +57,6 @@ const Followers = ({
     }
   };
 
-  if (isFollowing === null) {
-    return <span>Loading...</span>;
-  }
-
   return (
     <Button
       className={"bg-primary text-white border-default-200"}

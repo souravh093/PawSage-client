@@ -4,7 +4,6 @@ import PostCard from "@/components/card/PostCard";
 import { TPost } from "@/types/post.interface";
 import { getPosts } from "@/services/FetchPosts";
 import { currentUser } from "@/services/AuthService";
-import InfiniteScroll from "./_components/InfiniteScroll";
 
 const Feed = async ({ searchParams }: { searchParams: any }) => {
   const searchQuery = searchParams.search || "";
@@ -16,7 +15,7 @@ const Feed = async ({ searchParams }: { searchParams: any }) => {
     page: 2,
     limit: 3,
   });
-  console.log(data);
+
   const userData = await currentUser();
   return (
     <div>
@@ -26,11 +25,6 @@ const Feed = async ({ searchParams }: { searchParams: any }) => {
           <PostCard key={post._id} data={post} />
         ))}
       </div>
-      {/* <InfiniteScroll
-        searchQuery={searchQuery}
-        categoryQuery={categoryQuery}
-        initialPosts={data?.result || []}
-      /> */}
     </div>
   );
 };

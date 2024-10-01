@@ -28,7 +28,7 @@ const layout = ({
 
 const SidebarWrapper = () => {
   return (
-    <div className="sticky top-20">
+    <div className="sticky top-20 scroll-my-1">
       <Sidebar />
     </div>
   );

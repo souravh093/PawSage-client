@@ -39,6 +39,7 @@ export interface CustomJwtPayload extends JwtPayload {
   profilePicture?: string;
   id: string;
   email: string;
+  premiumMember: boolean;
 }
 
 export const currentUser = async () => {
@@ -71,3 +72,5 @@ export const getNewAccessToken = async () => {
     throw new Error(error);
   }
 };
+
+

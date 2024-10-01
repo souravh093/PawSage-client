@@ -8,8 +8,8 @@ export const getPosts = async ({
 }: {
   search: string | undefined;
   category: string | undefined;
-  page: number | undefined | null;
-  limit: number | undefined | null;
+  page: number | undefined;
+  limit: number | undefined;
 }) => {
   const fetchOptions = {
     next: {
@@ -37,3 +37,24 @@ export const getPosts = async ({
 
   return res.json();
 };
+
+
+export const getPremiumPosts = async () => {
+  const fetchOptions = {
+    next: {
+      tags: ["posts"],
+    },
+  };
+
+  const queryParams = new URLSearchParams();
+  queryParams.append("isPremium", "true");
+  queryParams.append("sort", "-createdAt");
+  queryParams.append("limit", "5");
+
+  const res = await fetch(
+    `${envConfig.baseApi}/posts?${queryParams.toString()}`,
+    fetchOptions
+  );
+
+  return res.json();
+}

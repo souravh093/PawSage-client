@@ -10,7 +10,7 @@ const CreatePost = async () => {
     <div className="bg-white dark:bg-[#18181B] shadow-medium rounded-md p-3 flex gap-3">
       <Avatar className="cursor-pointer" src={userData?.profilePicture} />
       {userData && <CreatePostModal userId={userData?.id} />}
-      <MonetizationModal />
+      {!userData?.premiumMember && <MonetizationModal />}
     </div>
   );
 };
