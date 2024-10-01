@@ -40,7 +40,6 @@ const CreatePostModal = ({ userId }: { userId: string }) => {
   const [isImageUploading, setIsImageUploading] = useState(false);
   const [selectedProfilePicture, setSelectedProfilePicture] =
     useState<File | null>(null);
-  console.log(content);
 
   const methods = useForm();
   const { handleSubmit, reset } = methods;

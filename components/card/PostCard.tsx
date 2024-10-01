@@ -20,7 +20,6 @@ export default async function PostCard({ data }: { data: TPost }) {
 
   const comments = await axiosInstance.get(`/comments/${_id}`);
 
-  console.log(comments?.data?.data);
   return (
     <Card className="w-full">
       <CardHeader className="justify-between">
@@ -40,7 +39,7 @@ export default async function PostCard({ data }: { data: TPost }) {
             </h5>
           </div>
         </div>
-        <Followers />
+        {userData?.email && <Followers />}
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400">
         <Image
@@ -51,7 +50,8 @@ export default async function PostCard({ data }: { data: TPost }) {
           height={270}
         />
         <span className="pt-2">
-          <ContentPost content={content} />
+          {/* <ContentPost content={content} /> */}
+          <h2 className="text-black dark:text-white my-5">{title}</h2>
         </span>
 
         <div>
@@ -84,7 +84,7 @@ export default async function PostCard({ data }: { data: TPost }) {
               </div>
             ))}
           </div>
-          <Comment userData={userData} />
+          {userData?.email && <Comment postId={_id} userData={userData} />}
         </div>
       </CardBody>
     </Card>
