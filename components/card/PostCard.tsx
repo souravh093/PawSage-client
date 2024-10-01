@@ -1,11 +1,10 @@
 import React from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Card, CardHeader, CardBody } from "@nextui-org/card";
 import { Avatar } from "@nextui-org/avatar";
 import { TPost } from "@/types/post.interface";
 import Image from "next/image";
 import ContentPost from "@/app/(withClientLayout)/(home)/@feed/_components/ContentPost";
 import Followers from "../shared/Followers";
-import { Divider } from "@nextui-org/divider";
 import ButtonGroup from "./ButtonGroup";
 import Comment from "./Comment";
 import { currentUser } from "@/services/AuthService";
@@ -39,9 +38,10 @@ export default async function PostCard({ data }: { data: TPost }) {
             </h5>
           </div>
         </div>
-        {userData?.email && <Followers />}
+        <Followers userId={userId?._id} userData={userData} />
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400">
+        <h2 className="text-black dark:text-white my-3 text-lg">{title}</h2>
         <Image
           alt="Card background"
           className="object-cover rounded-xl w-full h-96"
@@ -49,23 +49,16 @@ export default async function PostCard({ data }: { data: TPost }) {
           width={270}
           height={270}
         />
-        <span className="pt-2">
-          {/* <ContentPost content={content} /> */}
-          <h2 className="text-black dark:text-white my-5">{title}</h2>
+        <span className="py-2 flex gap-2 flex-col">
+          <ContentPost content={content} />
         </span>
 
         <div>
           <div>
             <div className="flex gap-3 mb-3">
               <div className="flex gap-1">
-                <p className="font-semibold text-default-400 text-small">4</p>
-                <p className=" text-default-400 text-small">Following</p>
-              </div>
-              <div className="flex gap-1">
-                <p className="font-semibold text-default-400 text-small">
-                  97.1K
-                </p>
-                <p className="text-default-400 text-small">Followers</p>
+                <p className="font-semibold text-default-400 text-small">{likes}</p>
+                <p className=" text-default-400 text-small">Votes</p>
               </div>
             </div>
           </div>
