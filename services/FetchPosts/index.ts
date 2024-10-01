@@ -1,13 +1,39 @@
 import envConfig from "@/config/envConfig";
 
-export const getPosts = async () => {
+export const getPosts = async ({
+  search = "",
+  category = "",
+  page = 1,
+  limit = 10,
+}: {
+  search: string | undefined;
+  category: string | undefined;
+  page: number | undefined | null;
+  limit: number | undefined | null;
+}) => {
   const fetchOptions = {
     next: {
       tags: ["posts"],
     },
   };
-  
-  const res = await fetch(`${envConfig.baseApi}/posts`, fetchOptions);
+
+  const queryParams = new URLSearchParams();
+  if (search) {
+    queryParams.append("searchTerm", search);
+  }
+
+  if (category) {
+    queryParams.append("category", category);
+  }
+
+  queryParams.append("sort", "-likes");
+  queryParams.append("page", page.toString());
+  queryParams.append("limit", limit.toString());
+
+  const res = await fetch(
+    `${envConfig.baseApi}/posts?${queryParams.toString()}`,
+    fetchOptions
+  );
 
   return res.json();
 };

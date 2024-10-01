@@ -57,13 +57,19 @@ export default async function PostCard({ data }: { data: TPost }) {
           <div>
             <div className="flex gap-3 mb-3">
               <div className="flex gap-1">
-                <p className="font-semibold text-default-400 text-small">{likes}</p>
+                <p className="font-semibold text-default-400 text-small">
+                  {likes}
+                </p>
                 <p className=" text-default-400 text-small">Votes</p>
               </div>
             </div>
           </div>
-          <div className="my-4 bg-gray-300 dark:bg-gray-700 h-[1px]"></div>
-          <ButtonGroup />
+          {userData?.email && (
+            <>
+              <div className="my-4 bg-gray-300 dark:bg-gray-700 h-[1px]"></div>
+              <ButtonGroup postId={_id} userId={userData?.id} />
+            </>
+          )}
           <div className="my-4 bg-gray-300 dark:bg-gray-700 h-[1px]"></div>
 
           <div>
