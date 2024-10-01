@@ -10,6 +10,7 @@ import ButtonGroup from "./ButtonGroup";
 import Comment from "./Comment";
 import { currentUser } from "@/services/AuthService";
 import { axiosInstance } from "@/lib/AxiosInstance";
+import { TPostComment } from "@/types/comment.interface";
 
 export default async function PostCard({ data }: { data: TPost }) {
   const { title, _id, category, content, isPremium, likes, thumbnail, userId } =
@@ -28,14 +29,14 @@ export default async function PostCard({ data }: { data: TPost }) {
             isBordered
             radius="full"
             size="md"
-            src={userId.profilePicture}
+            src={userId?.profilePicture}
           />
           <div className="flex flex-col gap-1 items-start justify-center">
             <h4 className="text-small font-semibold leading-none text-default-600">
-              {userId.name}
+              {userId?.name}
             </h4>
             <h5 className="text-small tracking-tight text-default-400">
-              {userId.email}
+              {userId?.email}
             </h5>
           </div>
         </div>
@@ -73,7 +74,7 @@ export default async function PostCard({ data }: { data: TPost }) {
           <div className="my-4 bg-gray-300 dark:bg-gray-700 h-[1px]"></div>
 
           <div>
-            {comments?.data?.data?.map((comment) => (
+            {comments?.data?.data?.map((comment: TPostComment) => (
               <div key={comment._id} className="flex items-center my-3 gap-1">
                 <Avatar src={comment?.userId?.profilePicture} />
                 <div className="flex flex-col gap-[1px] py-1 bg-gray-100 px-5 rounded-2xl dark:bg-gray-900">
