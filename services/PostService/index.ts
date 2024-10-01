@@ -9,6 +9,7 @@ export const createPost = async (postData: FieldValues) => {
     const { data } = await axiosInstance.post("/posts", postData);
     return data;
   } catch (error: any) {
-    toast.error(error.response.data.message || "Something went wrong");
+    console.log(error.response.data.message)
+    // toast.error(error.response.data.message || "Something went wrong");
   }
 };

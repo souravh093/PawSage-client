@@ -1,3 +1,4 @@
+"use client"
 import { currentUser, CustomJwtPayload } from "@/services/AuthService";
 import { Avatar } from "@nextui-org/avatar";
 import { Input } from "@nextui-org/input";

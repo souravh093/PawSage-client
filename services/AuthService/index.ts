@@ -39,9 +39,7 @@ export interface CustomJwtPayload extends JwtPayload {
   profilePicture?: string;
   id: string;
   email: string;
-
-} 
-
+}
 
 export const currentUser = async () => {
   const accessToken = cookies().get("accessToken")?.value;
@@ -53,4 +51,23 @@ export const currentUser = async () => {
   }
 
   return decoded;
+};
+
+export const getNewAccessToken = async () => {
+  const refreshToken = cookies().get("refreshToken")?.value;
+
+  try {
+    const { data } = await axiosInstance({
+      method: "POST",
+      url: "/auth/refresh-token",
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    });
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
 };
