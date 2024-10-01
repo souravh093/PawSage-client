@@ -12,8 +12,8 @@ const Feed = async ({ searchParams }: { searchParams: any }) => {
   const { data } = await getPosts({
     search: searchQuery,
     category: categoryQuery,
-    page: 2,
-    limit: 3,
+    page: 1,
+    limit: 10,
   });
 
   const userData = await currentUser();

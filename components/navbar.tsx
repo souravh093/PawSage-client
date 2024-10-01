@@ -7,7 +7,6 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
@@ -18,8 +17,12 @@ import { ThemeSwitch } from "@/components/theme-switch";
 
 import logo from "@/public/logo.png";
 import Image from "next/image";
+import AuthDynamic from "./AuthDynamic";
+import MonetizationModal from "./shared/modal/MonetizationModal";
+import { currentUser } from "@/services/AuthService";
 
-export const Navbar = () => {
+export const Navbar = async () => {
+  const userData = await currentUser();
   return (
     <NextUINavbar
       maxWidth="xl"
@@ -64,26 +67,7 @@ export const Navbar = () => {
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem className="hidden md:flex">
-          <Button
-            as={Link}
-            className="text-sm font-normal border-none text-default-600 "
-            href={"/login"}
-            variant="ghost"
-          >
-            Login
-          </Button>
-        </NavbarItem>
-        <NavbarItem className="hidden md:flex">
-          <Button
-            as={Link}
-            className="text-sm font-normal text-default-600 bg-secondary hover:bg-secondaryLight"
-            href={"/register"}
-            variant="ghost"
-          >
-            Sign Up
-          </Button>
-        </NavbarItem>
+        <AuthDynamic />
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">

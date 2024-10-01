@@ -8,6 +8,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/modal";
+import { Spinner } from "@nextui-org/spinner";
 import {
   BadgeCheck,
   BookOpenIcon,
@@ -17,7 +18,11 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export default function MonetizationModal() {
+export default function MonetizationModal({
+  className,
+}: {
+  className?: string;
+}) {
   const router = useRouter();
   const { mutate: createPayment, data, isSuccess, isPending } = usePayment();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -26,7 +31,7 @@ export default function MonetizationModal() {
     await createPayment("1000");
   };
 
-  if(data?.paymentSession?.payment_url) {
+  if (data?.paymentSession?.payment_url) {
     router.push(data?.paymentSession?.payment_url);
   }
 
@@ -34,7 +39,7 @@ export default function MonetizationModal() {
     <>
       <Button
         onPress={onOpen}
-        className="bg-primary text-white"
+        className={`bg-primary text-white ${className}`}
         endContent={<BadgeCheck />}
       >
         On Monetization
@@ -75,7 +80,7 @@ export default function MonetizationModal() {
                       size="lg"
                       onClick={handlePayment}
                     >
-                      Pay Now 1000 BDT
+                      {isPending ? <Spinner /> : "Pay Now 1000 BDT"}
                     </Button>
                     <p className="text-sm text-center text-muted-foreground">
                       Secure payment powered by Amar Pay

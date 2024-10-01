@@ -13,18 +13,32 @@ import {
 import PWInput from "@/components/form/PWInput";
 import { useLogin } from "@/hooks/auth.hook";
 import { Spinner } from "@nextui-org/spinner";
+import { useUser } from "@/context/user.provider";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 
 const Login = () => {
-  const { mutate: handleLogin, isPending } = useLogin();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
+  const { setLoading } = useUser();
+  const { mutate: handleLogin, isPending, isSuccess } = useLogin();
   const methods = useForm();
 
   const { handleSubmit, reset } = methods;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     await handleLogin(data);
-
+    setLoading(true);
     reset();
   };
+
+  if (!isPending && isSuccess) {
+    if (redirect) {
+      router.push(redirect);
+    } else {
+      router.push("/");
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-green-100 flex flex-col items-center justify-center p-4">

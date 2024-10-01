@@ -7,6 +7,7 @@ export type TUser = {
   name: string;
   email: string;
   profilePicture: string;
+  premiumMember: boolean;
 }
 
 export type TPost = {
