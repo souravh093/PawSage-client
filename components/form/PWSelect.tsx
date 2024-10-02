@@ -16,6 +16,7 @@ const PWSelect = ({
   label,
   options,
   isDisabled,
+  defaultValue,
 }: IProps) => {
   const {
     register,
@@ -23,6 +24,7 @@ const PWSelect = ({
   } = useFormContext();
   return (
     <Select
+      defaultSelectedKeys={defaultValue}
       errorMessage={errors[name] ? (errors[name]?.message as string) : ""}
       variant={variant}
       label={label}

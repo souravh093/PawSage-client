@@ -74,3 +74,12 @@ export const getNewAccessToken = async () => {
   }
 };
 
+export const updateUserData = async (userData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.put("/users/me", userData);
+
+    return data;
+  } catch (error: any) {
+    console.log(error.response.data);
+  }
+};

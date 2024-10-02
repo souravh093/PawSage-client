@@ -1,5 +1,6 @@
 import PostCard from "@/components/card/PostCard";
 import Container from "@/components/shared/Container";
+import EditProfileModal from "@/components/shared/modal/EditProfileModal";
 import { axiosInstance } from "@/lib/AxiosInstance";
 import { currentUser } from "@/services/AuthService";
 import { TPost } from "@/types/post.interface";
@@ -40,17 +41,17 @@ const ProfilePage = async () => {
       <div className="my-5">
         <div className="flex justify-between items-center mb-5">
           <div className="flex items-center gap-2">
-            <Avatar className="w-44 h-44" src={userData?.profilePicture} />
+            <Avatar className="w-44 h-44" src={userInfo?.data?.profilePicture} />
             <div>
-              <h1 className="font-bold text-2xl">{data?.data?.name}</h1>
-              <p>{userData?.email}</p>
+              <h1 className="font-bold text-2xl">{userInfo?.data?.name}</h1>
+              <p>{userInfo?.data?.email}</p>
               <h3>{followersCount?.data?.followerCount} followers</h3>
               <h3>{followersCount?.data?.followingCount} following</h3>
             </div>
           </div>
 
           <div>
-            <Button startContent={<Edit />}>Edit Profile</Button>
+            <EditProfileModal userData={userInfo?.data} />
           </div>
         </div>
         <Divider />
