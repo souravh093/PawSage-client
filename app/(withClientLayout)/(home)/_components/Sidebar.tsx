@@ -10,7 +10,6 @@ const Sidebar = async () => {
   const { data } = await getUsers();
   const userData = await currentUser();
   const { data: premiumPosts } = await getPremiumPosts();
-  console.log(premiumPosts);
   return (
     <div className="flex flex-col gap-5">
       <div className="w-full space-y-6">
