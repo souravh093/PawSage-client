@@ -110,6 +110,7 @@ const EditProfileModal = ({ userData }: { userData: TUser }) => {
     if (!isPending && isSuccess) {
       reset();
       setPreviewUrl(null);
+      onOpenChange();
     }
   };
 

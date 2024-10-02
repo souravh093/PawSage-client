@@ -2,6 +2,7 @@
 
 import { axiosInstance } from "@/lib/AxiosInstance";
 import { jwtDecode, JwtPayload } from "jwt-decode";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
@@ -78,6 +79,7 @@ export const updateUserData = async (userData: FieldValues) => {
   try {
     const { data } = await axiosInstance.put("/users/me", userData);
 
+    revalidateTag("userData");
     return data;
   } catch (error: any) {
     console.log(error.response.data);

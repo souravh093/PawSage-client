@@ -2,7 +2,7 @@ import PostCard from "@/components/card/PostCard";
 import Container from "@/components/shared/Container";
 import EditProfileModal from "@/components/shared/modal/EditProfileModal";
 import { axiosInstance } from "@/lib/AxiosInstance";
-import { currentUser } from "@/services/AuthService";
+import { getUserData } from "@/services/User/indext";
 import { TPost } from "@/types/post.interface";
 import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
@@ -13,12 +13,10 @@ import Image from "next/image";
 import React from "react";
 
 const ProfilePage = async () => {
-  const userData = await currentUser();
-  const { data } = await axiosInstance.get(`/users/me`);
   const { data: followersPosts } = await axiosInstance.get("/followers/me");
   const { data: followersCount } = await axiosInstance.get("/followers/count");
-  const { data: userInfo } = await axiosInstance.get(`/users/me`);
-  console.log(userInfo);
+  const userInfo = await getUserData();
+
   return (
     <Container>
       <div className="border border-gray-500">
