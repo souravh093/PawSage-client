@@ -1,10 +1,8 @@
 "use server";
 
-import envConfig from "@/config/envConfig";
 import { axiosInstance } from "@/lib/AxiosInstance";
 import { revalidateTag } from "next/cache";
 import { FieldValues } from "react-hook-form";
-import { toast } from "sonner";
 
 export const createPost = async (postData: FieldValues) => {
   try {
@@ -17,3 +15,27 @@ export const createPost = async (postData: FieldValues) => {
     // toast.error(error.response.data.message || "Something went wrong");
   }
 };
+
+
+export const deletePost = async (postId: string) => {
+  try {
+    const { data } = await axiosInstance.delete(`/posts/${postId}`);
+
+    revalidateTag("posts");
+    return data;
+  } catch (error: any) {
+    console.log(error.response.data.message);
+    // toast.error(error.response.data.message || "Something went wrong");
+  }
+};
+
+export const getAllPosts = async () => {
+  try {
+    const {data} = await axiosInstance.get("/posts");
+
+    return data;
+  } catch (error: any) {
+    console.log(error.response.data.message)
+  }
+}
+

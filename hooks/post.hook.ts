@@ -1,5 +1,5 @@
-import { createPost } from "@/services/PostService";
-import { useMutation } from "@tanstack/react-query";
+import { createPost, deletePost } from "@/services/PostService";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -8,10 +8,23 @@ export const usePost = () => {
     mutationKey: ["post"],
     mutationFn: async (userData) => await createPost(userData),
     onSuccess: (data) => {
-      toast.success(data.message || "Registration successful");
+      toast.success(data.message || "Fetch Data successful");
     },
     onError: (error: any) => {
-      toast.error("Registration failed");
+      toast.error("Fetch Data failed");
+    },
+  });
+};
+
+export const useDeletePost = () => {
+  return useMutation<any, Error, string>({
+    mutationKey: ["post"],
+    mutationFn: async (postId) => await deletePost(postId),
+    onSuccess: (data) => {
+      toast.success(data.message || "Delete data successful");
+    },
+    onError: (error: any) => {
+      toast.error("Fetch Data failed");
     },
   });
 };

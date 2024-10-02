@@ -6,10 +6,10 @@ export const getPosts = async ({
   page = 1,
   limit = 10,
 }: {
-  search: string | undefined;
-  category: string | undefined;
-  page: number | undefined;
-  limit: number | undefined;
+  search?: string | undefined;
+  category?: string | undefined;
+  page?: number | undefined;
+  limit?: number | undefined;
 }) => {
   const fetchOptions = {
     next: {
@@ -26,9 +26,15 @@ export const getPosts = async ({
     queryParams.append("category", category);
   }
 
+  if (limit) {
+    queryParams.append("limit", limit.toString());
+  }
+  
+  if (page) {
+    queryParams.append("page", page.toString());
+  }
+
   queryParams.append("sort", "-likes");
-  queryParams.append("page", page.toString());
-  queryParams.append("limit", limit.toString());
 
   const res = await fetch(
     `${envConfig.baseApi}/posts?${queryParams.toString()}`,
@@ -37,7 +43,6 @@ export const getPosts = async ({
 
   return res.json();
 };
-
 
 export const getPremiumPosts = async () => {
   const fetchOptions = {
@@ -57,4 +62,4 @@ export const getPremiumPosts = async () => {
   );
 
   return res.json();
-}
+};

@@ -38,7 +38,7 @@ export default function ProfileDropdown() {
           <Link href="/profile">Profile</Link>
         </DropdownItem>
         <DropdownItem key="new">
-          <Link href="/admin/dashboard">Dashboard</Link>
+          <Link href="/admin">Dashboard</Link>
         </DropdownItem>
         <DropdownItem
           onClick={handleLogout}
