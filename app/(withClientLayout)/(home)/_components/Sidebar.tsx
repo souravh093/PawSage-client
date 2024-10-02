@@ -7,7 +7,7 @@ import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import Image from "next/image";
 
 const Sidebar = async () => {
-  const { data } = await getUsers();
+  const { data } = await getUsers({ limit: 5 });
   const userData = await currentUser();
   const { data: premiumPosts } = await getPremiumPosts();
   return (

@@ -36,8 +36,7 @@ export default function DashboardLayout({
   ];
 
   const SidebarContent = () => (
-    <div className="sticky top-0">
-      <h1 className="text-2xl font-bold p-4">My Dashboard</h1>
+    <div className="sticky top-8">
       <nav>
         {menuItems.map((item, index) => (
           <Link

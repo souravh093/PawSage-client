@@ -5,10 +5,9 @@ import { axiosInstance } from "@/lib/AxiosInstance";
 import { getUserData } from "@/services/User/indext";
 import { TPost } from "@/types/post.interface";
 import { Avatar } from "@nextui-org/avatar";
-import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
-import { Edit, MapPinHouse, Phone, ShieldQuestion } from "lucide-react";
+import {  MapPinHouse, Phone, ShieldQuestion } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 

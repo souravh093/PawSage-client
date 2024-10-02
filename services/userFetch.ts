@@ -1,7 +1,6 @@
 import envConfig from "@/config/envConfig";
-import { cookies } from "next/headers";
 
-export const getUsers = async ({
+export const getUsersAll = async ({
   limit = 10,
   page = 1,
   role,
@@ -30,6 +29,7 @@ export const getUsers = async ({
   }
 
   queryParams.append("sort", "-createdAt");
+  queryParams.append("isDeleted", "false");
 
   const res = await fetch(
     `${envConfig.baseApi}/users/all?${queryParams.toString()}`,
@@ -39,19 +39,3 @@ export const getUsers = async ({
   return res.json();
 };
 
-export const getUserData = async () => {
-  const token = cookies().get("accessToken")?.value;
-  console.log(token);
-  const fetchOptions: Record<string, unknown> = {
-    next: {
-      tags: ["userData"],
-    },
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  const res = await fetch(`${envConfig.baseApi}/users/me`, fetchOptions);
-
-  return res.json();
-};
