@@ -52,7 +52,7 @@ const ProfilePage = async () => {
           </div>
         </div>
         <Divider />
-        <div className="grid grid-cols-5 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
           <div className="col-span-2 my-5">
             <Card>
               <CardHeader>About</CardHeader>

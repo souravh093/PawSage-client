@@ -14,11 +14,11 @@ const layout = ({
   return (
     <Container>
       <div className="grid grid-cols-3 gap-10 my-5">
-        <main className="col-span-2">
+        <main className="col-span-3 md:col-span-2">
           {searchFilter}
           {feed}
           </main>
-        <div className="col-span-1">
+        <div className="hidden md:block col-span-1">
           <SidebarWrapper />
         </div>
       </div>
