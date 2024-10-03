@@ -1,4 +1,5 @@
 "use client";
+import { useUser } from "@/context/user.provider";
 import {
   useCheckFollowing,
   useFollowers,
@@ -29,7 +30,7 @@ const Followers = ({
 
   useEffect(() => {
     if (checkFollowing) {
-      setIsFollowing(checkFollowing.data?.userId === userId);
+      setIsFollowing(checkFollowing?.data?.userId === userId);
     }
   }, [checkFollowing, userId]);
 
@@ -57,6 +58,8 @@ const Followers = ({
     }
   };
 
+  if (userId === userData?.id) return null;
+
   return (
     <Button
       className={"bg-primary text-white border-default-200"}
@@ -65,7 +68,9 @@ const Followers = ({
       size="sm"
       onClick={handleFollower}
       variant={"bordered"}
-      endContent={isFollowing ? <UserCheck size={16} /> : <UserPlus size={16} />}
+      endContent={
+        isFollowing ? <UserCheck size={16} /> : <UserPlus size={16} />
+      }
     >
       {isFollowing ? "Unfollow" : "Follow"}
     </Button>

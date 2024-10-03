@@ -1,7 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-const ContentPost = ({ content }: { content: string | undefined }) => {
+const ContentPost = ({
+  content,
+  details,
+}: {
+  content: string | undefined;
+  details: boolean | undefined;
+}) => {
   const [truncatedContent, setTruncatedContent] = useState<string>("");
 
   useEffect(() => {
@@ -12,8 +18,12 @@ const ContentPost = ({ content }: { content: string | undefined }) => {
         : text;
     };
 
-    setTruncatedContent(truncateContent(content, 300));
-  }, [content]);
+    if (details) {
+      setTruncatedContent(content || "");
+    } else {
+      setTruncatedContent(truncateContent(content, 300));
+    }
+  }, [content, details]);
 
   return (
     <div

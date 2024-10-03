@@ -29,12 +29,12 @@ export const getPosts = async ({
   if (limit) {
     queryParams.append("limit", limit.toString());
   }
-  
+
   if (page) {
     queryParams.append("page", page.toString());
   }
 
-  queryParams.append("sort", "-likes");
+  queryParams.append("sort", `${search || category ? "-likes" : "-createdAt"}`);
 
   const res = await fetch(
     `${envConfig.baseApi}/posts?${queryParams.toString()}`,

@@ -8,15 +8,23 @@ import Followers from "../shared/Followers";
 import ButtonGroup from "./ButtonGroup";
 import Comment from "./Comment";
 import { TPostComment } from "@/types/comment.interface";
-import { currentUser, CustomJwtPayload } from "@/services/AuthService";
+import { CustomJwtPayload } from "@/services/AuthService";
+import Link from "next/link";
+import EditComment from "./EditComment";
 
 interface PostCardProps {
   data: TPost;
   comments: TPostComment[];
   userData: CustomJwtPayload | null;
+  details?: boolean;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ data, comments, userData }) => {
+const PostCard: React.FC<PostCardProps> = ({
+  data,
+  comments,
+  userData,
+  details,
+}) => {
   const { title, _id, category, content, isPremium, likes, thumbnail, userId } =
     data;
 
@@ -46,17 +54,19 @@ const PostCard: React.FC<PostCardProps> = ({ data, comments, userData }) => {
         <Followers userId={userId?._id} userData={userData} />
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400">
-        <h2 className="text-black dark:text-white my-3 text-lg">{title}</h2>
-        <Image
-          alt="Card background"
-          className="object-cover rounded-xl w-full h-96"
-          src={thumbnail || "/default-thumbnail.png"}
-          width={270}
-          height={270}
-        />
-        <span className="py-2 flex gap-2 flex-col">
-          <ContentPost content={content} />
-        </span>
+        <Link href={`/${_id}`}>
+          <h2 className="text-black dark:text-white my-3 text-lg">{title}</h2>
+          <Image
+            alt="Card background"
+            className="object-cover rounded-xl w-full h-96"
+            src={thumbnail || "/default-thumbnail.png"}
+            width={270}
+            height={270}
+          />
+          <span className="py-2 flex gap-2 flex-col">
+            <ContentPost details={details} content={content} />
+          </span>
+        </Link>
 
         <div>
           <div>
@@ -81,9 +91,12 @@ const PostCard: React.FC<PostCardProps> = ({ data, comments, userData }) => {
             {comments?.map((comment: TPostComment) => (
               <div key={comment._id} className="flex items-center my-3 gap-1">
                 <Avatar src={comment?.userId?.profilePicture} />
-                <div className="flex flex-col gap-[1px] py-1 bg-gray-100 px-5 rounded-2xl dark:bg-gray-900">
-                  <h1 className="text-black">{comment?.userId?.name}</h1>
-                  <p>{comment.comment}</p>
+                <div className="flex justify-between gap-2 py-1 bg-gray-100 px-5 rounded-2xl dark:bg-gray-900">
+                  <div>
+                    <h1 className="text-black">{comment?.userId?.name}</h1>
+                    <p>{comment.comment}</p>
+                  </div>
+                  <EditComment comment={comment} />
                 </div>
               </div>
             ))}

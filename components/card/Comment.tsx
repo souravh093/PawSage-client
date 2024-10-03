@@ -1,10 +1,9 @@
 "use client";
 import { useComment } from "@/hooks/comment.hook";
-import useDebounce from "@/hooks/debounce.hook";
-import { currentUser, CustomJwtPayload } from "@/services/AuthService";
+import { CustomJwtPayload } from "@/services/AuthService";
 import { Avatar } from "@nextui-org/avatar";
 import { Input } from "@nextui-org/input";
-import React, { useState } from "react";
+import React from "react";
 
 const Comment = ({
   userData,
