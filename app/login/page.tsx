@@ -15,6 +15,7 @@ import { useLogin } from "@/hooks/auth.hook";
 import { Spinner } from "@nextui-org/spinner";
 import { useUser } from "@/context/user.provider";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
+import ForgetPassword from "@/components/shared/modal/ForgetPassword";
 
 const Login = () => {
   const router = useRouter();
@@ -79,9 +80,7 @@ const Login = () => {
               </form>
             </FormProvider>
             <div className="mt-4 text-center">
-              <Link href="#" className="text-sm text-primary hover:underline">
-                Forgot your password?
-              </Link>
+             <ForgetPassword />
             </div>
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
