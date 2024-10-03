@@ -17,9 +17,11 @@ const Feed = async ({ searchParams }: { searchParams: any }) => {
   });
 
   const userData = await currentUser();
+  const CreatePostElement = userData?.email ? await CreatePost() : null;
+
   return (
     <div>
-      {userData?.email && <CreatePost />}
+      {CreatePostElement}
       <div className="my-5 flex flex-col gap-5">
         {data?.result?.map((post: TPost) => (
           <PostCard key={post._id} data={post} />

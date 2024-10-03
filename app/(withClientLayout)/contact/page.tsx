@@ -29,8 +29,8 @@ const Contact = () => {
             Contact Us
           </h2>
           <p className="max-w-2xl text-center">
-            Have a question or need help with your rental? We're here to help!
-            Fill out the form below and we'll get back to you as soon as
+            Have a question or need help with your rental? We are here to help!
+            Fill out the form below and we will get back to you as soon as
             possible.
           </p>
         </div>

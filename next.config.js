@@ -19,7 +19,7 @@ const nextConfig = {
         hostname: "https://i.pravatar.cc",
       }
     ],
-  },
+  }
 };
 
 module.exports = nextConfig;

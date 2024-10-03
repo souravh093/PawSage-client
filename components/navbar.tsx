@@ -18,10 +18,8 @@ import { ThemeSwitch } from "@/components/theme-switch";
 import logo from "@/public/logo.png";
 import Image from "next/image";
 import AuthDynamic from "./AuthDynamic";
-import { currentUser } from "@/services/AuthService";
 
 export const Navbar = async () => {
-  const userData = await currentUser();
   return (
     <NextUINavbar
       maxWidth="xl"

@@ -54,7 +54,7 @@ export default function MonetizationModal({
               <ModalBody>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-10 px-10">
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">What you'll get:</h3>
+                    <h3 className="text-lg font-semibold">What you will get:</h3>
                     <ul className="space-y-2">
                       <li className="flex items-center">
                         <PawPrintIcon className="mr-2 h-4 w-4" />

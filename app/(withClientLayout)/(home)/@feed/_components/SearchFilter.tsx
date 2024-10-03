@@ -1,4 +1,5 @@
 "use client";
+
 import useDebounce from "@/hooks/debounce.hook";
 import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
@@ -24,7 +25,7 @@ const SearchFilter = () => {
     }
 
     router.push(`/?${params.toString()}`);
-  }, [debouncedSearch, category]);
+  }, [debouncedSearch, category, router]);
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);

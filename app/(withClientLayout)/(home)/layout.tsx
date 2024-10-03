@@ -1,21 +1,19 @@
 import Container from "@/components/shared/Container";
 import React, { ReactNode } from "react";
 import Sidebar from "./_components/Sidebar";
+import SearchFilter from "./@feed/_components/SearchFilter";
 
 const layout = ({
-  children,
-  searchFilter,
   feed,
 }: {
   children: ReactNode;
   feed: ReactNode;
-  searchFilter: ReactNode;
 }) => {
   return (
     <Container>
       <div className="grid grid-cols-3 gap-10 my-5">
         <main className="col-span-3 md:col-span-2">
-          {searchFilter}
+          <SearchFilter />
           {feed}
           </main>
         <div className="hidden md:block col-span-1">
