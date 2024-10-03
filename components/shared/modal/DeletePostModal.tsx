@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useDeletePost } from "@/hooks/post.hook";
 import { Button } from "@nextui-org/button";
 import {

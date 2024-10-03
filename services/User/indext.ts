@@ -41,7 +41,6 @@ export const getUsers = async ({
 
 export const getUserData = async () => {
   const token = cookies().get("accessToken")?.value;
-  console.log(token);
   const fetchOptions: Record<string, unknown> = {
     next: {
       tags: ["userData"],

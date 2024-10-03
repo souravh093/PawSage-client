@@ -23,7 +23,6 @@ export const unFollow = async (followerId: string | undefined) => {
         id: followerId,
       },
     });
-    console.log(data);
     return data;
   } catch (error: any) {
     console.log(error.response.data.message);

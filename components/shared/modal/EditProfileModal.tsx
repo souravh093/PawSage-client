@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 "use client";
 import dynamic from "next/dynamic";
 
@@ -44,7 +45,6 @@ import { Spinner } from "@nextui-org/spinner";
 
 const EditProfileModal = ({ userData }: { userData: TUser }) => {
   const { name, address, gender, email, profilePicture, phone } = userData;
-  console.log(profilePicture);
   const { mutate: updateProfile, isPending, isSuccess } = useUpdateProfile();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const methods = useForm({});

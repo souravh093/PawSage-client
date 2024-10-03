@@ -1,3 +1,5 @@
+"use client";
+import React, { useEffect, useState } from "react";
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -12,19 +14,33 @@ import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
 
-import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 
 import logo from "@/public/logo.png";
 import Image from "next/image";
 import AuthDynamic from "./AuthDynamic";
+import { siteConfig } from "@/config/site";
 
-export const Navbar = async () => {
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+export const Navbar = () => {
+  const [navItems, setNavItems] = useState<NavItem[]>([]);
+  const [navMenuItems, setNavMenuItems] = useState<NavItem[]>([]);
+
+  useEffect(() => {
+    // Assuming siteConfig is imported and doesn't require async fetching
+    setNavItems(siteConfig.navItems);
+    setNavMenuItems(siteConfig.navMenuItems);
+  }, []);
+
   return (
     <NextUINavbar
       maxWidth="xl"
       position="sticky"
-      className="dark:bg-slate-900 bg-primary "
+      className="dark:bg-slate-900 bg-primary"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
@@ -40,7 +56,7 @@ export const Navbar = async () => {
           </NextLink>
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
-          {siteConfig.navItems.map((item) => (
+          {navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
                 className={clsx(
@@ -57,10 +73,7 @@ export const Navbar = async () => {
         </ul>
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
+      <NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full" justify="end">
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>
@@ -74,15 +87,15 @@ export const Navbar = async () => {
 
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
-          {siteConfig.navMenuItems.map((item, index) => (
+          {navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
                 color={
                   index === 2
                     ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
+                    : index === navMenuItems.length - 1
+                    ? "danger"
+                    : "foreground"
                 }
                 href={item.href}
                 size="lg"

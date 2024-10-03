@@ -28,7 +28,6 @@ const ContentPage = () => {
     const fetchPosts = async () => {
       try {
         const { data } = await getPosts({ page, limit: 10 });
-        console.log(data);
         setPosts(data.result);
         setTotalPages(data.meta.totalPage);
       } catch (error) {
@@ -41,7 +40,6 @@ const ContentPage = () => {
     fetchPosts();
   }, [page]);
 
-  console.log(totalPages);
 
   if (loading) {
     return (
@@ -58,8 +56,6 @@ const ContentPage = () => {
       </div>
     );
   }
-
-  //   console.log(posts);
 
   return (
     <div className="p-4">

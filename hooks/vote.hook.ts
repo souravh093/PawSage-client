@@ -8,7 +8,6 @@ export const useUpVote = () => {
     mutationKey: ["upvote"],
     mutationFn: async (voteData) => await upVote(voteData),
     onSuccess: (data) => {
-        console.log(data);
       toast.success(data.message || "Upvote successful");
     },
     onError: (error) => {

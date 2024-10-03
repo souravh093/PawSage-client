@@ -1,23 +1,28 @@
 import React from "react";
 import { Card, CardHeader, CardBody } from "@nextui-org/card";
 import { Avatar } from "@nextui-org/avatar";
-import { TPost } from "@/types/post.interface";
+import { TPost, TUser } from "@/types/post.interface";
 import Image from "next/image";
 import ContentPost from "@/app/(withClientLayout)/(home)/@feed/_components/ContentPost";
 import Followers from "../shared/Followers";
 import ButtonGroup from "./ButtonGroup";
 import Comment from "./Comment";
-import { currentUser } from "@/services/AuthService";
-import { axiosInstance } from "@/lib/AxiosInstance";
 import { TPostComment } from "@/types/comment.interface";
+import { currentUser, CustomJwtPayload } from "@/services/AuthService";
 
-export default async function PostCard({ data }: { data: TPost }) {
+interface PostCardProps {
+  data: TPost;
+  comments: TPostComment[];
+  userData: CustomJwtPayload | null;
+}
+
+const PostCard: React.FC<PostCardProps> = ({ data, comments, userData }) => {
   const { title, _id, category, content, isPremium, likes, thumbnail, userId } =
     data;
 
-  const userData = await currentUser();
-
-  const comments = await axiosInstance.get(`/comments/${_id}`);
+  const createComment = userData?.email ? (
+    <Comment postId={_id} userData={userData} />
+  ) : null;
 
   return (
     <Card className="w-full">
@@ -45,7 +50,7 @@ export default async function PostCard({ data }: { data: TPost }) {
         <Image
           alt="Card background"
           className="object-cover rounded-xl w-full h-96"
-          src={thumbnail || "/default-thumbnail.png"} // TODO
+          src={thumbnail || "/default-thumbnail.png"}
           width={270}
           height={270}
         />
@@ -73,7 +78,7 @@ export default async function PostCard({ data }: { data: TPost }) {
           <div className="my-4 bg-gray-300 dark:bg-gray-700 h-[1px]"></div>
 
           <div>
-            {comments?.data?.data?.map((comment: TPostComment) => (
+            {comments?.map((comment: TPostComment) => (
               <div key={comment._id} className="flex items-center my-3 gap-1">
                 <Avatar src={comment?.userId?.profilePicture} />
                 <div className="flex flex-col gap-[1px] py-1 bg-gray-100 px-5 rounded-2xl dark:bg-gray-900">
@@ -83,9 +88,11 @@ export default async function PostCard({ data }: { data: TPost }) {
               </div>
             ))}
           </div>
-          {userData?.email && <Comment postId={_id} userData={userData} />}
+          {createComment}
         </div>
       </CardBody>
     </Card>
   );
-}
+};
+
+export default PostCard;

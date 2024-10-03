@@ -1,15 +1,9 @@
 import Followers from "@/components/shared/Followers";
-import { currentUser } from "@/services/AuthService";
-import { getPremiumPosts } from "@/services/FetchPosts";
-import { getUsers } from "@/services/User/indext";
 import { Avatar } from "@nextui-org/avatar";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import Image from "next/image";
 
-const Sidebar = async () => {
-  const { data } = await getUsers({ limit: 5 });
-  const userData = await currentUser();
-  const { data: premiumPosts } = await getPremiumPosts();
+const Sidebar = ({ users, userData, premiumPosts }: { users: any; userData: any; premiumPosts: any }) => {
   return (
     <div className="flex flex-col gap-5">
       <div className="w-full space-y-6">
@@ -19,7 +13,7 @@ const Sidebar = async () => {
           </CardHeader>
           <CardBody>
             <div className="space-y-4">
-              {data.map(
+              {users.map(
                 ({
                   _id,
                   profilePicture,
@@ -52,7 +46,7 @@ const Sidebar = async () => {
         </CardHeader>
         <CardBody>
           <div className="space-y-4">
-            {premiumPosts?.result?.map(
+            {premiumPosts?.map(
               ({
                 _id,
                 title,

@@ -13,14 +13,13 @@ const ButtonGroup = ({
   userId: string | undefined;
 }) => {
   const { mutate: addVote, data } = useUpVote();
-  console.log(data);
+
   const { mutate: addDownVote } = useDownVote();
   const handleUpVote = () => {
     addVote({ postId, userId, type: "upvote" });
   };
 
   const handleDownVote = () => {
-    console.log("downvote");
     addDownVote({ postId, userId, type: "downvote" });
   };
   return (

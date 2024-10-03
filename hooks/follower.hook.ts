@@ -21,7 +21,6 @@ export const useUnFollowers = () => {
     mutationKey: ["followers"],
     mutationFn: async (followerId) => await unFollow(followerId),
     onSuccess: (data) => {
-      console.log(data);
       toast.success(data.message || "Followed successful");
     },
     onError: (error: any) => {
