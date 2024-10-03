@@ -22,7 +22,6 @@ const page = async ({ params }: TPostId) => {
   );
   const comments: TPostComment[] = commentsResponse.data.data;
 
-  console.log(userData);
 
   return (
     <div>

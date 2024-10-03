@@ -1,4 +1,9 @@
-import { createPost, deletePost } from "@/services/PostService";
+import {
+  createPost,
+  deletePost,
+  getPost,
+  updatePost,
+} from "@/services/PostService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -22,6 +27,27 @@ export const useDeletePost = () => {
     mutationFn: async (postId) => await deletePost(postId),
     onSuccess: (data) => {
       toast.success(data.message || "Delete data successful");
+    },
+    onError: (error: any) => {
+      toast.error("Fetch Data failed");
+    },
+  });
+};
+
+export const useGetPost = (postId: string) => {
+  return useQuery<any, Error, FieldValues>({
+    queryKey: ["post"],
+    queryFn: async () => await getPost(postId),
+  });
+};
+
+export const useUpdatePost = () => {
+  return useMutation<any, Error, FieldValues>({
+    mutationKey: ["post"],
+    mutationFn: async ({ userData, postId }) =>
+      await updatePost(postId, userData),
+    onSuccess: (data) => {
+      toast.success(data.message || "Update Post successful");
     },
     onError: (error: any) => {
       toast.error("Fetch Data failed");

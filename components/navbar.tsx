@@ -31,7 +31,6 @@ export const Navbar = () => {
   const [navMenuItems, setNavMenuItems] = useState<NavItem[]>([]);
 
   useEffect(() => {
-    // Assuming siteConfig is imported and doesn't require async fetching
     setNavItems(siteConfig.navItems);
     setNavMenuItems(siteConfig.navMenuItems);
   }, []);

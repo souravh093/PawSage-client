@@ -5,11 +5,13 @@ export const getPosts = async ({
   category = "",
   page = 1,
   limit = 10,
+  userId
 }: {
   search?: string | undefined;
   category?: string | undefined;
   page?: number | undefined;
   limit?: number | undefined;
+  userId?: string | undefined;
 }) => {
   const fetchOptions = {
     next: {
@@ -18,6 +20,9 @@ export const getPosts = async ({
   };
 
   const queryParams = new URLSearchParams();
+  if (userId) {
+    queryParams.append("userId", userId);
+  }
   if (search) {
     queryParams.append("searchTerm", search);
   }

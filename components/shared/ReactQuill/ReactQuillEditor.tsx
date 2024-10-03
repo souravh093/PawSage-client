@@ -12,12 +12,14 @@ interface ReactQuillEditorProps {
   value: string;
   setValue: (value: string) => void;
   toolbarId: string;
+  defaultValue?: string;
 }
 
 const ReactQuillEditor: React.FC<ReactQuillEditorProps> = ({
   value,
   setValue,
   toolbarId,
+  defaultValue = "",
 }) => {
   return (
     <div className="h-44 my-16">
@@ -25,6 +27,7 @@ const ReactQuillEditor: React.FC<ReactQuillEditorProps> = ({
       <ReactQuill
         className="h-44"
         theme="snow"
+        defaultValue={defaultValue}
         value={value}
         onChange={setValue}
         placeholder="Enter Message..."

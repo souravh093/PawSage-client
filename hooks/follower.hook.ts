@@ -36,3 +36,4 @@ export const useCheckFollowing = (userData: any) => {
     queryFn: async () => await checkFollowing(userData),
   });
 };
+

@@ -38,7 +38,11 @@ export default function ProfileDropdown() {
           <Link href="/profile">Profile</Link>
         </DropdownItem>
         <DropdownItem key="new">
-          <Link href="/admin">Dashboard</Link>
+          {user?.role === "admin" ? (
+            <Link href="/admin">Dashboard</Link>
+          ) : (
+            <Link href="/client">Dashboard</Link>
+          )}
         </DropdownItem>
         <DropdownItem
           onClick={handleLogout}

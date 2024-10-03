@@ -39,3 +39,23 @@ export const getAllPosts = async () => {
   }
 }
 
+export const getPost = async (postId: string) => {
+  try {
+    const {data} = await axiosInstance.get(`/posts/${postId}`);
+    
+    return data;
+  } catch (error: any) {
+    console.log(error.response.data.message)
+  }
+}
+
+export const updatePost = async (postId: string, postData: FieldValues) => {
+  try {
+    const {data} = await axiosInstance.put(`/posts/${postId}`, postData);
+
+    revalidateTag("posts");
+    return data;
+  } catch (error: any) {
+    console.log(error.response.data.message)
+  }
+}
