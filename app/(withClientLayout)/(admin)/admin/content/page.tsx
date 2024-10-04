@@ -17,12 +17,15 @@ import { Badge } from "@nextui-org/badge";
 import { BadgeCheck, Delete, Trash2 } from "lucide-react";
 import { Button } from "@nextui-org/button";
 import DeletePostModal from "@/components/shared/modal/DeletePostModal";
+import CreatePostModal from "@/components/shared/modal/CreatePostModal";
+import { useUser } from "@/context/user.provider";
 
 const ContentPage = () => {
   const [posts, setPosts] = useState<TPost[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
+  const user = useUser();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,7 +42,6 @@ const ContentPage = () => {
 
     fetchPosts();
   }, [page]);
-
 
   if (loading) {
     return (
@@ -59,6 +61,9 @@ const ContentPage = () => {
 
   return (
     <div className="p-4">
+      <div className="my-5 flex justify-end">
+        <CreatePostModal premiumMember={true} userId={user?.user?.id} />
+      </div>
       <Table aria-label="Example static collection table">
         <TableHeader>
           <TableColumn>Thumbnail</TableColumn>

@@ -36,8 +36,8 @@ const CreatePostModal = ({
   userId,
   premiumMember,
 }: {
-  userId: string;
-  premiumMember: boolean;
+  userId: string | undefined;
+  premiumMember: boolean | undefined;
 }) => {
   const { mutate: handlePost, isPending, isSuccess } = usePost();
 
@@ -222,7 +222,7 @@ const CreatePostModal = ({
                       className="w-full bg-primary hover:bg-primaryLight"
                       type="submit"
                     >
-                      {isPending ? <Spinner /> : "Post Now"}
+                      {isImageUploading || isPending ? <Spinner /> : "Post Now"}
                     </Button>
                   </form>
                 </FormProvider>
