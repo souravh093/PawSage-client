@@ -32,7 +32,13 @@ import { usePost } from "@/hooks/post.hook";
 import PWSelect from "@/components/form/PWSelect";
 import { Spinner } from "@nextui-org/spinner";
 
-const CreatePostModal = ({ userId }: { userId: string }) => {
+const CreatePostModal = ({
+  userId,
+  premiumMember,
+}: {
+  userId: string;
+  premiumMember: boolean;
+}) => {
   const { mutate: handlePost, isPending, isSuccess } = usePost();
 
   const [content, setContent] = useState("");
@@ -92,6 +98,12 @@ const CreatePostModal = ({ userId }: { userId: string }) => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const postData = {
       ...data,
+      isPremium:
+        data.isPremium === "true"
+          ? true
+          : data.isPremium === "false"
+            ? false
+            : false,
       content,
       thumbnail: selectedProfilePicture
         ? await uploadImageToFirebase(selectedProfilePicture)
@@ -128,15 +140,29 @@ const CreatePostModal = ({ userId }: { userId: string }) => {
               <ModalBody className="overflow-y-auto max-h-[600px]">
                 <FormProvider {...methods}>
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="space-y-2">
-                      <PWSelect
-                        label="Category"
-                        name="category"
-                        options={[
-                          { key: "Tip", label: "Tip" },
-                          { key: "Story", label: "Story" },
-                        ]}
-                      />
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="space-y-2">
+                        <PWSelect
+                          label="Category"
+                          name="category"
+                          options={[
+                            { key: "Tip", label: "Tip" },
+                            { key: "Story", label: "Story" },
+                          ]}
+                        />
+                      </div>
+                      {premiumMember && (
+                        <div className="space-y-2">
+                          <PWSelect
+                            label="Premium Status"
+                            name="isPremium"
+                            options={[
+                              { key: "true", label: "Premium" },
+                              { key: "false", label: "Regular" },
+                            ]}
+                          />
+                        </div>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <PWInput

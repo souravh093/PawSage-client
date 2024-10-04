@@ -3,6 +3,7 @@ import { Avatar } from "@nextui-org/avatar";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import Image from "next/image";
 import ContentPost from "../@feed/_components/ContentPost";
+import Link from "next/link";
 
 const Sidebar = ({
   users,
@@ -67,7 +68,11 @@ const Sidebar = ({
                 thumbnail: string;
                 content: string;
               }) => (
-                <div key={_id} className="flex items-center space-x-3">
+                <Link
+                  href={`/${_id}`}
+                  key={_id}
+                  className="flex items-center space-x-3"
+                >
                   <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center">
                     <Image
                       src={thumbnail}
@@ -83,7 +88,7 @@ const Sidebar = ({
                       <ContentPost content={content} />
                     </p>
                   </div>
-                </div>
+                </Link>
               )
             )}
           </div>

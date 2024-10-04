@@ -46,7 +46,7 @@ export default function MonetizationModal({
       </Button>
       <Modal size="3xl" isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
               <ModalHeader className="flex gap-1 items-center px-16 pt-4">
                 Premium Access <BadgeCheck />

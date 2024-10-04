@@ -11,12 +11,14 @@ import { TPostComment } from "@/types/comment.interface";
 import { CustomJwtPayload } from "@/services/AuthService";
 import Link from "next/link";
 import EditComment from "./EditComment";
+import { BadgeCheck } from "lucide-react";
 
 interface PostCardProps {
   data: TPost;
   comments: TPostComment[];
   userData: CustomJwtPayload | null;
   details?: boolean;
+  premium?: boolean | undefined;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -24,6 +26,7 @@ const PostCard: React.FC<PostCardProps> = ({
   comments,
   userData,
   details,
+  premium,
 }) => {
   const { title, _id, category, content, isPremium, likes, thumbnail, userId } =
     data;
@@ -54,8 +57,17 @@ const PostCard: React.FC<PostCardProps> = ({
         <Followers userId={userId?._id} userData={userData} />
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400">
-        <Link href={`/${_id}`}>
-          <h2 className="text-black dark:text-white my-3 text-lg">{title}</h2>
+        <Link
+          href={!isPremium ? `/${_id}` : isPremium && premium ? `/${_id}` : "#"}
+        >
+          {isPremium && (
+            <div className="flex gap-2 items-center">
+              <BadgeCheck className="text-primary" />
+              Premium
+            </div>
+          )}
+
+          <h2 className="text-black dark:text-white mb-3 text-lg">{title}</h2>
           <Image
             alt="Card background"
             className="object-cover rounded-xl w-full h-96"
