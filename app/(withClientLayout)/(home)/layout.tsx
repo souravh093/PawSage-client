@@ -5,12 +5,13 @@ import Sidebar from "./_components/Sidebar";
 import SearchFilter from "./@feed/_components/SearchFilter";
 import { getPremiumPosts } from "@/services/FetchPosts";
 import { currentUser } from "@/services/AuthService";
-import { getUsers } from "@/services/User/indext";
+import { getUserData, getUsers } from "@/services/User/indext";
 
 const layout = async ({ feed }: { children: ReactNode; feed: ReactNode }) => {
   const { data: users } = await getUsers({ limit: 5 });
   const userData = await currentUser();
   const { data: premiumPosts } = await getPremiumPosts();
+  const loggedUser = await getUserData();
 
   return (
     <Container>
@@ -20,17 +21,27 @@ const layout = async ({ feed }: { children: ReactNode; feed: ReactNode }) => {
           {feed}
         </main>
         <div className="hidden md:block col-span-1">
-          <SidebarWrapper users={users} userData={userData} premiumPosts={premiumPosts.result} />
+          <SidebarWrapper
+            users={users}
+            userData={userData}
+            premiumPosts={premiumPosts.result}
+            premium={loggedUser?.data?.premiumMember}
+          />
         </div>
       </div>
     </Container>
   );
 };
 
-const SidebarWrapper = ({ users, userData, premiumPosts }: any) => {
+const SidebarWrapper = ({ users, userData, premiumPosts, premium }: any) => {
   return (
     <div className="sticky top-20 scroll-my-1">
-      <Sidebar users={users} userData={userData} premiumPosts={premiumPosts} />
+      <Sidebar
+        users={users}
+        userData={userData}
+        premium={premium}
+        premiumPosts={premiumPosts}
+      />
     </div>
   );
 };

@@ -19,6 +19,8 @@ export const getPosts = async ({
     },
   };
 
+  console.log(search, category)
+
   const queryParams = new URLSearchParams();
   if (userId) {
     queryParams.append("userId", userId);
@@ -68,3 +70,4 @@ export const getPremiumPosts = async () => {
 
   return res.json();
 };
+

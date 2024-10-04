@@ -1,21 +1,20 @@
 import React from "react";
 import { Card, CardHeader, CardBody } from "@nextui-org/card";
 import { Avatar } from "@nextui-org/avatar";
-import { TPost, TUser } from "@/types/post.interface";
+import { TComment, TPost, TUser } from "@/types/post.interface";
 import Image from "next/image";
 import ContentPost from "@/app/(withClientLayout)/(home)/@feed/_components/ContentPost";
 import Followers from "../shared/Followers";
 import ButtonGroup from "./ButtonGroup";
 import Comment from "./Comment";
-import { TPostComment } from "@/types/comment.interface";
 import { CustomJwtPayload } from "@/services/AuthService";
 import Link from "next/link";
 import EditComment from "./EditComment";
 import { BadgeCheck } from "lucide-react";
+import { Code } from "@nextui-org/code";
 
 interface PostCardProps {
   data: TPost;
-  comments: TPostComment[];
   userData: CustomJwtPayload | null;
   details?: boolean;
   premium?: boolean | undefined;
@@ -23,13 +22,21 @@ interface PostCardProps {
 
 const PostCard: React.FC<PostCardProps> = ({
   data,
-  comments,
   userData,
   details,
   premium,
 }) => {
-  const { title, _id, category, content, isPremium, likes, thumbnail, userId } =
-    data;
+  const {
+    title,
+    _id,
+    category,
+    content,
+    isPremium,
+    likes,
+    thumbnail,
+    userId,
+    comments,
+  } = data;
 
   const createComment = userData?.email ? (
     <Comment postId={_id} userData={userData} />
@@ -75,6 +82,9 @@ const PostCard: React.FC<PostCardProps> = ({
             width={270}
             height={270}
           />
+
+          <Code className="my-3">Category: {category}</Code>
+
           <span className="py-2 flex gap-2 flex-col">
             <ContentPost details={details} content={content} />
           </span>
@@ -100,7 +110,7 @@ const PostCard: React.FC<PostCardProps> = ({
           <div className="my-4 bg-gray-300 dark:bg-gray-700 h-[1px]"></div>
 
           <div>
-            {comments?.map((comment: TPostComment) => (
+            {comments?.map((comment: TComment) => (
               <div key={comment._id} className="flex items-center my-3 gap-1">
                 <Avatar src={comment?.userId?.profilePicture} />
                 <div className="flex justify-between gap-2 py-1 bg-gray-100 px-5 rounded-2xl dark:bg-gray-900">

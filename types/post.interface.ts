@@ -10,6 +10,13 @@ export type TUser = {
   premiumMember: boolean;
 }
 
+export type TComment = {
+  _id: string;
+  postId: string;
+  userId: TUser;
+  comment: string;
+};
+
 export type TPost = {
   _id: string;
   title?: string;
@@ -19,4 +26,5 @@ export type TPost = {
   userId?: TUser | undefined;
   likes?: number;
   isPremium?: boolean;
+  comments?: TComment[];
 };

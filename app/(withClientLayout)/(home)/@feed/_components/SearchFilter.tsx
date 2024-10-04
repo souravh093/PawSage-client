@@ -32,7 +32,7 @@ const SearchFilter = () => {
   };
 
   return (
-    <div className="flex justify-between gap-5 my-5 sticky top-16 z-30 bg-gray-200 py-2 px-2 rounded-md">
+    <div className="flex justify-between gap-5 my-5 sticky top-16 z-30 bg-gray-200 dark:bg-[#18181B] py-2 px-2 rounded-md">
       <Input
         className="w-full"
         placeholder="Search for a tip or story"

@@ -2,17 +2,21 @@ import Followers from "@/components/shared/Followers";
 import { Avatar } from "@nextui-org/avatar";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import Image from "next/image";
-import ContentPost from "../@feed/_components/ContentPost";
 import Link from "next/link";
+import { Code } from "@nextui-org/code";
+import { Badge } from "@nextui-org/badge";
+import { BadgeCheck } from "lucide-react";
 
 const Sidebar = ({
   users,
   userData,
   premiumPosts,
+  premium,
 }: {
   users: any;
   userData: any;
   premiumPosts: any;
+  premium?: boolean;
 }) => {
   return (
     <div className="flex flex-col gap-5">
@@ -61,32 +65,40 @@ const Sidebar = ({
                 _id,
                 title,
                 thumbnail,
-                content,
+                category,
+                isPremium,
               }: {
                 _id: string;
                 title: string;
                 thumbnail: string;
-                content: string;
+                category: string;
+                isPremium?: boolean;
               }) => (
                 <Link
-                  href={`/${_id}`}
+                  href={premium ? `/${_id}` : "#"}
                   key={_id}
                   className="flex items-center space-x-3"
                 >
-                  <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center">
-                    <Image
-                      src={thumbnail}
-                      alt={title}
-                      className="w-[64px] h-[64px] object-cover rounded-md"
-                      width={64}
-                      height={64}
-                    />
-                  </div>
+                  <Badge
+                    content={
+                      isPremium && <BadgeCheck className="text-primary" />
+                    }
+                  >
+                    <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center">
+                      <Image
+                        src={thumbnail}
+                        alt={title}
+                        className="w-[64px] h-[64px] object-cover rounded-md"
+                        width={64}
+                        height={64}
+                      />
+                    </div>
+                  </Badge>
                   <div>
-                    <p className="font-medium">{title}</p>
                     <p className="text-sm text-gray-500">
-                      <ContentPost content={content} />
+                      <Code>Category: {category}</Code>
                     </p>
+                    <p className="font-medium">{title}</p>
                   </div>
                 </Link>
               )
