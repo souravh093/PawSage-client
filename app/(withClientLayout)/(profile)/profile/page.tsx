@@ -90,7 +90,6 @@ const ProfilePage = async () => {
                 <PostCard
                   key={post._id}
                   data={post}
-                  comments={comments}
                   userData={userData}
                 />
               );
