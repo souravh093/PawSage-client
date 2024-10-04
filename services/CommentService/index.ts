@@ -8,7 +8,7 @@ export const createComment = async (commentData: FieldValues) => {
   try {
     const { data } = await axiosInstance.post("/comments", commentData);
 
-    revalidateTag("posts");
+    revalidateTag("comments");
 
     return data;
   } catch (error: any) {
@@ -22,7 +22,8 @@ export const deleteComment = async (commentId: string | undefined) => {
   try {
     const { data } = await axiosInstance.delete(`/comments/${commentId}`);
 
-    revalidateTag("posts");
+    console.log(data);
+    revalidateTag("comments");
 
     return data;
   } catch (error: any) {
@@ -37,7 +38,8 @@ export const updateComment = async (commentData: FieldValues) => {
       comment: commentData.comment,
     });
 
-    revalidateTag("posts");
+    console.log(data);
+    revalidateTag("comments");
     return data;
   } catch (error: any) {
     console.log(error.response.data.message);

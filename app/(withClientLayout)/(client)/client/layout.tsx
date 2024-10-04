@@ -43,6 +43,11 @@ export default function ClientLayout({
       icon: <CreditCard size={20} />,
       href: "/client/followers",
     },
+    {
+      name: "Generate PDF",
+      icon: <CreditCard size={20} />,
+      href: "/client/pdf",
+    },
   ];
 
   const SidebarContent = () => (

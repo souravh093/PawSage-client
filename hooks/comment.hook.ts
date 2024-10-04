@@ -8,10 +8,10 @@ export const useComment = () => {
     mutationKey: ["comment"],
     mutationFn: async (userData) => await createComment(userData),
     onSuccess: (data) => {
-      toast.success(data.message || "Comment successful");
+      toast.success(data.message || "Registration successful");
     },
     onError: (error: any) => {
-      toast.error("Comment failed");
+      toast.error("Registration failed");
     },
   });
 };
@@ -22,10 +22,10 @@ export const useDeleteComment = () => {
     mutationKey: ["comment2"],
     mutationFn: async (commentId) => await deleteComment(commentId),
     onSuccess: (data) => {
-      toast.success(data.message || "Comment delete successful");
+      toast.success(data.message || "Registration successful");
     },
     onError: (error: any) => {
-      toast.error("comment failed");
+      toast.error("Registration failed");
     },
   });
 }
@@ -35,7 +35,7 @@ export const useUpdateComment = () => {
     mutationKey: ["comment3"],
     mutationFn: async (userData) => await updateComment(userData),
     onSuccess: (data) => {
-      toast.success(data.message || "Comment update successful");
+      toast.success(data.message || "Registration successful");
     },
     onError: (error: any) => {
       toast.error("Registration failed");
