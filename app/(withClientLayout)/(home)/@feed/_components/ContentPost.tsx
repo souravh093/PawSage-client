@@ -6,7 +6,7 @@ const ContentPost = ({
   details,
 }: {
   content: string | undefined;
-  details: boolean | undefined;
+  details?: boolean | undefined;
 }) => {
   const [truncatedContent, setTruncatedContent] = useState<string>("");
 

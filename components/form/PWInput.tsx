@@ -15,6 +15,7 @@ const PWInput = ({
   label,
   placeholder,
   defaultValue,
+  isDisabled,
   name,
 }: IProps) => {
   const {
@@ -27,6 +28,7 @@ const PWInput = ({
       variant={variant}
       size={size}
       required={required}
+      disabled={isDisabled}
       isInvalid={!!errors[name]}
       errorMessage={errors[name] ? (errors[name]?.message as string) : ""}
       {...register(name)}

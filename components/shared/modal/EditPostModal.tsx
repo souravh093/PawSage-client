@@ -16,7 +16,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/modal";
-import { BadgeCheck, Edit2, Plus, X } from "lucide-react";
+import { Edit2, X } from "lucide-react";
 import React, { useRef, useState } from "react";
 import {
   FieldValues,
@@ -28,16 +28,15 @@ import PWInput from "@/components/form/PWInput";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/firebase/firebase.config";
 import Image from "next/image";
-import { useGetPost,  useUpdatePost } from "@/hooks/post.hook";
+import { useGetPost, useUpdatePost } from "@/hooks/post.hook";
 import PWSelect from "@/components/form/PWSelect";
 import { Spinner } from "@nextui-org/spinner";
 
 const EditPostModal = ({ postId }: { postId: string }) => {
-    console.log(postId)
+  console.log(postId);
   const { mutate: handleUpdatePost, isPending: updatePending } =
     useUpdatePost();
   const { data: postData } = useGetPost(postId);
-  console.log(postData);
 
   const [content, setContent] = useState("");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -102,7 +101,9 @@ const EditPostModal = ({ postId }: { postId: string }) => {
         : postData?.data?.thumbnail,
     };
 
-    await handleUpdatePost(updatePostData);
+    console.log(content);
+
+    await handleUpdatePost({ postId, userData: updatePostData });
 
     if (!updatePending) {
       reset();
@@ -112,7 +113,6 @@ const EditPostModal = ({ postId }: { postId: string }) => {
     }
   };
 
-  console.log(postData);
 
   return (
     <>
@@ -152,26 +152,25 @@ const EditPostModal = ({ postId }: { postId: string }) => {
                       />
                     </div>
                     <div>
-                      {previewUrl ||
-                        (postData?.data?.thumbnail && (
-                          <div className="mt-4 flex justify-end relative py-2">
-                            <span
-                              onClick={handleRemoveImage}
-                              className="hover:bg-red-400 cursor-pointer hover:scale-110 absolute z-50 top-2 right-2 bg-red-500 rounded-full text-white p-[1px]"
-                            >
-                              <X size={20} />
-                            </span>
-                            <div className="relative w-full h-64">
-                              <Image
-                                src={previewUrl || postData?.data?.thumbnail}
-                                alt="Profile picture preview"
-                                fill
-                                style={{ objectFit: "contain" }}
-                                className="rounded-md w-full"
-                              />
-                            </div>
+                      {(previewUrl || postData?.data?.thumbnail) && (
+                        <div className="mt-4 flex justify-end relative py-2">
+                          <span
+                            onClick={handleRemoveImage}
+                            className="hover:bg-red-400 cursor-pointer hover:scale-110 absolute z-50 top-2 right-2 bg-red-500 rounded-full text-white p-[1px]"
+                          >
+                            <X size={20} />
+                          </span>
+                          <div className="relative w-full h-64">
+                            <Image
+                              src={previewUrl || postData?.data?.thumbnail}
+                              alt="Profile picture preview"
+                              fill
+                              style={{ objectFit: "contain" }}
+                              className="rounded-md w-full"
+                            />
                           </div>
-                        ))}
+                        </div>
+                      )}
                       <div className="space-y-2">
                         <label
                           className="flex h-14 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-default-200 text-default-500 shadow-sm transition-all duration-100 hover:border-default-400"

@@ -150,7 +150,7 @@ const EditProfileModal = ({ userData }: { userData: TUser }) => {
                           type="email"
                           placeholder="your@email.com"
                           defaultValue={email}
-                          required
+                          isDisabled={true}
                         />
                       </div>
                       <div className="space-y-2">

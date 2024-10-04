@@ -22,9 +22,12 @@ const PWSelect = ({
     register,
     formState: { errors },
   } = useFormContext();
+
+  const defaultSelectedKeys = defaultValue ? [defaultValue] : [];
+
   return (
     <Select
-      defaultSelectedKeys={defaultValue}
+      defaultSelectedKeys={defaultSelectedKeys}
       errorMessage={errors[name] ? (errors[name]?.message as string) : ""}
       variant={variant}
       label={label}

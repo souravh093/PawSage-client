@@ -42,7 +42,7 @@ export const useGetPost = (postId: string) => {
 };
 
 export const useUpdatePost = () => {
-  return useMutation<any, Error, FieldValues>({
+  return useMutation<any, Error, {userData: FieldValues, postId: string}>({
     mutationKey: ["post"],
     mutationFn: async ({ userData, postId }) =>
       await updatePost(postId, userData),

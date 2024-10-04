@@ -53,9 +53,12 @@ export const updatePost = async (postId: string, postData: FieldValues) => {
   try {
     const {data} = await axiosInstance.put(`/posts/${postId}`, postData);
 
+    console.log(data)
+
     revalidateTag("posts");
     return data;
   } catch (error: any) {
+    console.log(error?.response?.data.message?.errorMessages)
     console.log(error.response.data.message)
   }
 }

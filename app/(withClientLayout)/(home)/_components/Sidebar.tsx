@@ -2,8 +2,17 @@ import Followers from "@/components/shared/Followers";
 import { Avatar } from "@nextui-org/avatar";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import Image from "next/image";
+import ContentPost from "../@feed/_components/ContentPost";
 
-const Sidebar = ({ users, userData, premiumPosts }: { users: any; userData: any; premiumPosts: any }) => {
+const Sidebar = ({
+  users,
+  userData,
+  premiumPosts,
+}: {
+  users: any;
+  userData: any;
+  premiumPosts: any;
+}) => {
   return (
     <div className="flex flex-col gap-5">
       <div className="w-full space-y-6">
@@ -51,10 +60,12 @@ const Sidebar = ({ users, userData, premiumPosts }: { users: any; userData: any;
                 _id,
                 title,
                 thumbnail,
+                content,
               }: {
                 _id: string;
                 title: string;
                 thumbnail: string;
+                content: string;
               }) => (
                 <div key={_id} className="flex items-center space-x-3">
                   <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center">
@@ -69,7 +80,7 @@ const Sidebar = ({ users, userData, premiumPosts }: { users: any; userData: any;
                   <div>
                     <p className="font-medium">{title}</p>
                     <p className="text-sm text-gray-500">
-                      Exclusive content for members
+                      <ContentPost content={content} />
                     </p>
                   </div>
                 </div>
