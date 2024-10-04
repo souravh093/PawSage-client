@@ -18,11 +18,9 @@ export const createComment = async (commentData: FieldValues) => {
 };
 
 export const deleteComment = async (commentId: string | undefined) => {
-  console.log(commentId);
   try {
     const { data } = await axiosInstance.delete(`/comments/${commentId}`);
 
-    console.log(data);
     revalidateTag("comments");
 
     return data;
@@ -38,7 +36,6 @@ export const updateComment = async (commentData: FieldValues) => {
       comment: commentData.comment,
     });
 
-    console.log(data);
     revalidateTag("comments");
     return data;
   } catch (error: any) {

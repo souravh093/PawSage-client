@@ -59,8 +59,6 @@ const MyPosts = () => {
     );
   }
 
-  console.log(posts)
-
   return (
     <div className="p-4">
       <Table aria-label="Example static collection table">

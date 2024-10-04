@@ -36,7 +36,6 @@ const PostList: React.FC<PostListProps> = ({
         page: 1,
         limit: 10,
       });
-      console.log("Fetched initial posts:", data);
       setPosts(data.result || []);
       setPage(1);
       setHasMore(data.result.length > 0);
@@ -54,7 +53,6 @@ const PostList: React.FC<PostListProps> = ({
       page: page + 1,
       limit: 10,
     });
-    console.log("Fetched more posts:", data);
 
     if (data?.result?.length > 0) {
       setPosts((prev) => [...prev, ...data.result]);

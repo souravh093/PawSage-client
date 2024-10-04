@@ -4,6 +4,7 @@ import React from "react";
 import { Button } from "@nextui-org/button";
 import { ArrowDown, ArrowUp, Share } from "lucide-react";
 import { useDownVote, useUpVote } from "@/hooks/vote.hook";
+// import envConfig from "@/config/envConfig";
 
 const ButtonGroup = ({
   postId,
@@ -12,9 +13,9 @@ const ButtonGroup = ({
   postId: string | undefined;
   userId: string | undefined;
 }) => {
-  const { mutate: addVote, data } = useUpVote();
-
+  const { mutate: addVote } = useUpVote();
   const { mutate: addDownVote } = useDownVote();
+
   const handleUpVote = () => {
     addVote({ postId, userId, type: "upvote" });
   };
@@ -22,6 +23,26 @@ const ButtonGroup = ({
   const handleDownVote = () => {
     addDownVote({ postId, userId, type: "downvote" });
   };
+
+  // const handleShare = () => {
+  //   if (navigator.share) {
+  //     navigator
+  //       .share({
+  //         title: "Check out this post!",
+  //         url: `${envConfig.baseClient}@feed/${postId}`,
+  //         text: "I found this interesting post, take a look!",
+  //       })
+  //       .then(() => {
+  //         console.log("Shared successfully");
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error sharing:", error);
+  //       });
+  //   } else {
+  //     alert("Web Share API not supported in this browser.");
+  //   }
+  // };
+
   return (
     <div className="flex my-2">
       <Button
@@ -40,7 +61,12 @@ const ButtonGroup = ({
       >
         Down Vote
       </Button>
-      <Button startContent={<Share />} variant="light" className="w-1/3">
+      <Button
+        // onClick={handleShare}
+        startContent={<Share />}
+        variant="light"
+        className="w-1/3"
+      >
         Share
       </Button>
     </div>

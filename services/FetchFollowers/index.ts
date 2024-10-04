@@ -1,4 +1,5 @@
 import envConfig from "@/config/envConfig";
+import { cookies } from "next/headers";
 
 export const getFollowers = async () => {
   const fetchOptions = {
@@ -8,7 +9,7 @@ export const getFollowers = async () => {
   };
 
   const res = await fetch(
-    `${envConfig.baseApi}/followers/metoo}`,
+    `${envConfig.baseApi}/followers/me}`,
     fetchOptions
   );
 
@@ -16,13 +17,17 @@ export const getFollowers = async () => {
 };
 
 export const getFollowedUsers = async () => {
+  const accessToken = cookies().get("accessToken")?.value;
   const fetchOptions = {
     next: {
       tags: ["followedUsers"],
     },
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
   };
 
-  const res = await fetch(`${envConfig.baseApi}/followers/mee}`, fetchOptions);
+  const res = await fetch(`${envConfig.baseApi}/followers/metoo}`, fetchOptions);
 
   return res.json();
 };

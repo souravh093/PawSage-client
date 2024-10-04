@@ -1,9 +1,15 @@
-import React from 'react'
+import { Spinner } from "@nextui-org/spinner";
+import React from "react";
 
-const loading = () => {
+const Loading = () => {
   return (
-    <div>loading...</div>
-  )
-}
+    <div className="flex items-center justify-center h-screen bg-opacity-30 bg-white backdrop-blur-lg rounded-lg shadow-lg">
+      <Spinner size="lg" />
+      <span className="ml-4 text-xl font-semibold text-gray-700">
+        Loading...
+      </span>
+    </div>
+  );
+};
 
-export default loading
+export default Loading;

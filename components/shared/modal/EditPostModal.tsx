@@ -33,7 +33,6 @@ import PWSelect from "@/components/form/PWSelect";
 import { Spinner } from "@nextui-org/spinner";
 
 const EditPostModal = ({ postId }: { postId: string }) => {
-  console.log(postId);
   const { mutate: handleUpdatePost, isPending: updatePending } =
     useUpdatePost();
   const { data: postData } = useGetPost(postId);
@@ -101,7 +100,6 @@ const EditPostModal = ({ postId }: { postId: string }) => {
         : postData?.data?.thumbnail,
     };
 
-    console.log(content);
 
     await handleUpdatePost({ postId, userData: updatePostData });
 

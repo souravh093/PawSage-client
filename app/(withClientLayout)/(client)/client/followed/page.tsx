@@ -5,7 +5,6 @@ import React from "react";
 
 const Followers = async () => {
   const { data } = await axiosInstance.get(`/followers/metoo`);
-  console.log(data);
   return (
     <div className="p-4">
       <table className="min-w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md">

@@ -93,9 +93,10 @@ const Register = () => {
     const profilePicture = selectedProfilePicture
       ? await uploadImageToFirebase(selectedProfilePicture)
       : null;
+
     const userData = {
       ...data,
-      profilePicture,
+      profilePicture: profilePicture ? profilePicture : "",
     };
 
     await handleRegister(userData);
