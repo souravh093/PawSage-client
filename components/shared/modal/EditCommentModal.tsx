@@ -24,12 +24,10 @@ export default function EditCommentModal({
   const { mutate: updateComment, isPending: ePending } = useUpdateComment();
 
   const handleUpdate = (onClose: () => void) => {
-    // Call your update mutation
     updateComment(
-      { id: comment._id, comment: commentData }, // Assuming your mutation expects an ID and the new comment data
+      { id: comment._id, comment: commentData },
       {
         onSuccess: () => {
-          // Close the modal after a successful update
           onClose();
         },
       }

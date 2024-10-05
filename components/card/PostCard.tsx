@@ -42,6 +42,7 @@ const PostCard: React.FC<PostCardProps> = ({
     <Comment postId={_id} userData={userData} />
   ) : null;
 
+
   return (
     <Card className="w-full">
       <CardHeader className="justify-between">
@@ -65,7 +66,15 @@ const PostCard: React.FC<PostCardProps> = ({
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400">
         <Link
-          href={!isPremium ? `/${_id}` : isPremium && premium ? `/${_id}` : "#"}
+          href={
+            !isPremium
+              ? `/${_id}`
+              : isPremium && premium
+                ? `/${_id}`
+                : isPremium && !premium
+                  ? "/login"
+                  : "#"
+          }
         >
           {isPremium && (
             <div className="flex gap-2 items-center">
@@ -115,7 +124,9 @@ const PostCard: React.FC<PostCardProps> = ({
                 <Avatar src={comment?.userId?.profilePicture} />
                 <div className="flex justify-between gap-2 py-1 bg-gray-100 px-5 rounded-2xl dark:bg-gray-900">
                   <div>
-                    <h1 className="text-black">{comment?.userId?.name}</h1>
+                    <h1 className="text-black dark:text-white">
+                      {comment?.userId?.name}
+                    </h1>
                     <p>{comment.comment}</p>
                   </div>
                   <EditComment comment={comment} />

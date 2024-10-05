@@ -8,6 +8,9 @@ import PostList from "./_components/PostList";
 const Feed = async ({ searchParams }: { searchParams: any }) => {
   const searchQuery = searchParams.search || "";
   const categoryQuery = searchParams.category || "";
+  const userData = await currentUser();
+  const CreatePostElement = userData?.email ? await CreatePost() : null;
+  const currentUserData = await getUserData();
 
   const { data } = await getPosts({
     search: searchQuery,
@@ -15,10 +18,6 @@ const Feed = async ({ searchParams }: { searchParams: any }) => {
     page: 1,
     limit: 10,
   });
-
-  const userData = await currentUser();
-  const CreatePostElement = userData?.email ? await CreatePost() : null;
-  const currentUserData = await getUserData();
 
   return (
     <div>

@@ -75,7 +75,7 @@ const Sidebar = ({
                 isPremium?: boolean;
               }) => (
                 <Link
-                  href={premium ? `/${_id}` : "#"}
+                  href={premium ? `/${_id}` : "/login"}
                   key={_id}
                   className="flex items-center space-x-3"
                 >

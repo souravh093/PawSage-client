@@ -42,7 +42,7 @@ export default function MonetizationModal({
         className={`bg-primary text-white ${className}`}
         endContent={<BadgeCheck />}
       >
-        On Monetization
+        Premium Access
       </Button>
       <Modal size="3xl" isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>

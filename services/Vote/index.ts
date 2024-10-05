@@ -13,9 +13,8 @@ export const upVote = async (voteData: FieldValues) => {
 
     return data;
   } catch (error: any) {
-    // console.log(error.response.data);
-    console.log("error");
-    toast.error("Upvote failed tooooo");
+    console.log(error.response.data);
+    toast.error("Upvote failed too");
   }
 };
 

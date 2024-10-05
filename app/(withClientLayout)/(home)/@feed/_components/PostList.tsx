@@ -83,6 +83,7 @@ const PostList: React.FC<PostListProps> = ({
           return (
             <div ref={lastPostRef} key={post._id}>
               <PostCard
+                key={post._id}
                 data={post}
                 userData={userData}
                 premium={currentUserData?.data?.premiumMember}

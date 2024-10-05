@@ -31,7 +31,7 @@ const AuthDynamic = () => {
           <NavbarItem className="hidden md:flex">
             <Button
               as={Link}
-              className="text-sm font-normal text-default-600 bg-secondary hover:bg-secondaryLight"
+              className="text-sm font-normal text-default-600 border-accent hover:bg-primaryLight"
               href={"/register"}
               variant="ghost"
             >
