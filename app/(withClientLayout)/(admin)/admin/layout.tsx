@@ -11,6 +11,7 @@ import {
   XIcon,
   TableOfContents,
   CreditCard,
+  FileText,
 } from "lucide-react";
 import { Link } from "@nextui-org/link";
 import { Card } from "@nextui-org/card";
@@ -30,9 +31,18 @@ export default function DashboardLayout({
 
   const menuItems = [
     { name: "Dashboard", icon: <HomeIcon size={20} />, href: "/admin" },
-    { name: "Content", icon: <TableOfContents size={20} />, href: "/admin/content" },
+    {
+      name: "Content",
+      icon: <TableOfContents size={20} />,
+      href: "/admin/content",
+    },
     { name: "Users", icon: <UsersIcon size={20} />, href: "/admin/users" },
     { name: "Payment", icon: <CreditCard size={20} />, href: "/admin/payment" },
+    {
+      name: "Generate PDF",
+      icon: <FileText size={20} />,
+      href: "/admin/pdf",
+    },
   ];
 
   const SidebarContent = () => (
@@ -98,7 +108,9 @@ export default function DashboardLayout({
           />
         )}
 
-        <main className="flex-grow p-6 overflow-auto bg-white dark:bg-slate-950">{children}</main>
+        <main className="flex-grow p-6 overflow-auto bg-white dark:bg-slate-950">
+          {children}
+        </main>
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const Followers = async () => {
           {data?.data.length < 1 ? (
             <tr className="border-t border-gray-200 dark:border-gray-700">
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                No followers found
+                No followed user found
               </td>
             </tr>
           ) : (

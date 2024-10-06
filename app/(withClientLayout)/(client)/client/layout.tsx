@@ -9,6 +9,7 @@ import {
   XIcon,
   TableOfContents,
   CreditCard,
+  FileText,
 } from "lucide-react";
 import { Link } from "@nextui-org/link";
 import { Card } from "@nextui-org/card";
@@ -45,7 +46,7 @@ export default function ClientLayout({
     },
     {
       name: "Generate PDF",
-      icon: <CreditCard size={20} />,
+      icon: <FileText size={20} />,
       href: "/client/pdf",
     },
   ];

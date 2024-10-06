@@ -3,7 +3,6 @@ import Container from "@/components/shared/Container";
 import EditProfileModal from "@/components/shared/modal/EditProfileModal";
 import { axiosInstance } from "@/lib/AxiosInstance";
 import { currentUser } from "@/services/AuthService";
-import { getFollowedUsers } from "@/services/FetchFollowers";
 import { getUserData } from "@/services/User/indext";
 import { TPost } from "@/types/post.interface";
 import { Avatar } from "@nextui-org/avatar";
@@ -14,14 +13,11 @@ import Image from "next/image";
 import React from "react";
 
 const ProfilePage = async () => {
-  const { data: followersPosts } = await axiosInstance.get("/followers/me");
   const { data: followersCount } = await axiosInstance.get("/followers/count");
   const { data } = await axiosInstance.get(`/followers/metoo`);
   const { data: followersData } = await axiosInstance.get(`/followers/me`);
   const { data: myPosts } = await axiosInstance.get(`/posts/me`);
-  console.log(myPosts.data)
   const userInfo = await getUserData();
-
   const userData = await currentUser();
 
   return (
@@ -86,21 +82,25 @@ const ProfilePage = async () => {
             <Card className="my-5">
               <CardHeader>Followed Users</CardHeader>
               <CardBody className="flex flex-col gap-2">
-                {data?.data?.map(
-                  ({
-                    userId,
-                    _id,
-                  }: {
-                    userId: { profilePicture: string; name: string };
-                    _id: string;
-                  }) => {
-                    return (
-                      <div key={_id} className="flex gap-2 items-center">
-                        <Avatar src={userId.profilePicture} />
-                        <span>{userId?.name}</span>
-                      </div>
-                    );
-                  }
+                {data?.data.length < 1 ? (
+                  <h3>No Followed users</h3>
+                ) : (
+                  data?.data?.map(
+                    ({
+                      userId,
+                      _id,
+                    }: {
+                      userId: { profilePicture: string; name: string };
+                      _id: string;
+                    }) => {
+                      return (
+                        <div key={_id} className="flex gap-2 items-center">
+                          <Avatar src={userId.profilePicture} />
+                          <span>{userId?.name}</span>
+                        </div>
+                      );
+                    }
+                  )
                 )}
               </CardBody>
             </Card>
@@ -108,32 +108,40 @@ const ProfilePage = async () => {
             <Card className="my-5">
               <CardHeader>Followers Users</CardHeader>
               <CardBody className="flex flex-col gap-2">
-                {followersData?.data?.map(
-                  ({
-                    followerId,
-                    _id,
-                  }: {
-                    followerId: { profilePicture: string; name: string };
-                    _id: string;
-                  }) => {
-                    return (
-                      <div key={_id} className="flex gap-2 items-center">
-                        <Avatar src={followerId.profilePicture} />
-                        <span>{followerId?.name}</span>
-                      </div>
-                    );
-                  }
+                {followersData?.data.length < 1 ? (
+                  <h3>No followers</h3>
+                ) : (
+                  followersData?.data?.map(
+                    ({
+                      followerId,
+                      _id,
+                    }: {
+                      followerId: { profilePicture: string; name: string };
+                      _id: string;
+                    }) => {
+                      return (
+                        <div key={_id} className="flex gap-2 items-center">
+                          <Avatar src={followerId.profilePicture} />
+                          <span>{followerId?.name}</span>
+                        </div>
+                      );
+                    }
+                  )
                 )}
               </CardBody>
             </Card>
           </div>
 
           <div className="col-span-3 my-5 flex flex-col gap-5">
-            {myPosts?.data?.map(async (post: TPost) => {
-              return (
-                <PostCard key={post._id} data={post} userData={userData} />
-              );
-            })}
+            {myPosts?.data.length < 1 ? (
+              <h3>No post created</h3>
+            ) : (
+              myPosts?.data?.map(async (post: TPost) => {
+                return (
+                  <PostCard key={post._id} data={post} userData={userData} />
+                );
+              })
+            )}
           </div>
         </div>
       </div>
