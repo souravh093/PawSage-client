@@ -1,53 +1,121 @@
-# Next.js & NextUI Template
+# PAWSAGE
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
-
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
-
-## Technologies Used
-
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
-
-## How to Use
-
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
-
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
+### Live URL
+```js
+https://paw-sage-client-seven.vercel.app/
 ```
 
-### Install dependencies
+# Introduction
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+PAWSAGE is a pet tips and stories sharing website. There we can create pet tips and stories post and manipulate that as well. This website and premium features like create premium post and normal user don't access this posts. There are two user ADMIN and USER. This two role have different access this website. This website have authentication and authorization system. This website like social media like there can like, comment, share post ass well. Follow other user as well.
 
-```bash
+# Project Description
+
+PAWSAGE is an engaging platform dedicated to pet enthusiasts where users can share tips and stories about their pets. The website allows users to create, edit, and manage posts related to pet care, training, and experiences. It also includes premium features that enable users to create exclusive content accessible only to premium members. 
+
+The platform supports two types of users: ADMIN and USER. Each role has distinct access levels and permissions. Admins have comprehensive control over the content and user management, while regular users can interact with the content based on their access level.
+
+PAWSAGE incorporates a robust authentication and authorization system to ensure secure access and data integrity. It functions similarly to social media platforms, allowing users to like, comment, and share posts. Additionally, users can follow other members to stay updated with their latest posts and activities.
+
+Key features of PAWSAGE include:
+
+- **User Roles**: Differentiated access for ADMIN and USER roles.
+- **Authentication and Authorization**: Secure login and access control.
+- **Content Creation**: Users can create, edit, and delete posts.
+- **Premium Content**: Exclusive posts for premium members.
+- **Social Interactions**: Like, comment, and share posts.
+- **User Following**: Follow other users to see their posts in your feed.
+
+PAWSAGE aims to build a community of pet lovers where they can share valuable insights and heartwarming stories, fostering a supportive and informative environment.
+
+# Features
+
+- Search Posts
+- Comment Posts
+- Dark Mode
+- Mobile Responsive
+- Animation
+- Infinite Scrolling
+- Dashboard Role based
+- Payment System
+- Filter Options
+- PDF Export 
+- Personalize Profile
+- Skeleton 
+
+# Technology Stack
+
+- Next.js
+- Tanstack Query
+- Typescript
+- Farmer Motion
+- Lucid Icons
+- Next.ui
+- TailwindCSS
+- React Quill
+- Sonnar
+- Firebase
+- JSPDF
+- ZOD
+- React Hook Form
+- Moment.js
+
+## Installation Guideline
+
+First clone the project then must you have node.js 18+ version. Then open the code editor and. Install node modules and run the project. One thing you must have the backend integrations.
+
+# Prerequisite
+
+- Node.js (18+ version)
+- Code Editor
+
+# Installation Steps
+
+1. First Clone the project main branch
+
+```js
+https://github.com/souravh093/PawSage-client.git
+```
+
+2. Open you terminal and change directory to the project directory
+3. Install all package are added in the package.json file
+
+```js
 npm install
 ```
 
-### Run the development server
+4. Then open the project in your code editor
+5. Create .env.local and past below url
+``js
+NEXT_PUBLIC_BASE_API=http://localhost:5000/api/v1
+NEXT_PUBLIC_BASE_URL=http://localhost:3000/
+``
 
-```bash
+7. Run the project your terminal
+
+```js
 npm run dev
 ```
 
-### Setup pnpm (optional)
+8. Deploy then first command
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@nextui-org/*
+```
+npm run build
 ```
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+# Configuration
 
-## License
+N/A
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+## Usage
+
+1. Search post form landing page
+2. Scroll all the page with infinite scrolling
+3. Click the image and jump to details page
+4. Login page to access some feature
+5. Premium access to click there
+6. Dashboard show relevant access features
+7. Like, comment and share option to do that
+8. Have fun
+
+### Thank You
