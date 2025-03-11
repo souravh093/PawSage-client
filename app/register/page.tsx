@@ -129,6 +129,7 @@ const Register = () => {
                     <div className="space-y-2">
                       <PWInput
                         name={"name"}
+                        className="dark:text-gray-800"
                         label={"Name"}
                         placeholder="Enter your name"
                         required
@@ -136,6 +137,7 @@ const Register = () => {
                     </div>
                     <div className="space-y-2">
                       <PWInput
+                        className="dark:text-gray-800"
                         label={"Email"}
                         name="email"
                         type="email"
@@ -145,6 +147,7 @@ const Register = () => {
                     </div>
                     <div className="space-y-2">
                       <PWInput
+                        className="dark:text-gray-800"
                         label={"Password"}
                         name="password"
                         type="password"
@@ -153,6 +156,7 @@ const Register = () => {
                     </div>
                     <div className="space-y-2">
                       <PWInput
+                        className="dark:text-gray-800"
                         placeholder="+1 (555) 000-0000"
                         label={"Phone Number"}
                         name="phone"
@@ -161,6 +165,7 @@ const Register = () => {
                     </div>
                     <div className="space-y-2 md:col-span-2">
                       <PWTextarea
+                        className="dark:text-gray-800"
                         label={"Address"}
                         placeholder="Enter your address"
                         name="address"
@@ -169,6 +174,7 @@ const Register = () => {
                     </div>
                     <div className="space-y-2">
                       <PWSelect
+                        className="dark:text-gray-800"
                         label="Gender"
                         name="gender"
                         options={genderOptions}
@@ -176,7 +182,7 @@ const Register = () => {
                     </div>
                     <div className="space-y-2">
                       <label
-                        className="flex h-14 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-default-200 text-default-500 shadow-sm transition-all duration-100 hover:border-default-400"
+                        className="dark:text-gray-800 flex h-14 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-default-200 text-default-500 shadow-sm transition-all duration-100 hover:border-default-400"
                         htmlFor="image"
                       >
                         Upload Profile Picture (Optional)

@@ -37,7 +37,7 @@ export const Navbar = () => {
 
   return (
     <NextUINavbar
-      maxWidth="xl"
+      maxWidth="2xl"
       position="sticky"
       className="dark:bg-[#18181B] bg-primary"
     >

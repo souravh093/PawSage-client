@@ -27,7 +27,7 @@ const ContentPost = ({
 
   return (
     <div
-      className="prose"
+      className="prose dark:prose-invert  "
       dangerouslySetInnerHTML={{ __html: truncatedContent || "" }}
     />
   );

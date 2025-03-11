@@ -1,5 +1,5 @@
 import envConfig from "@/config/envConfig";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 
 export const getUsers = async ({
   limit = 10,

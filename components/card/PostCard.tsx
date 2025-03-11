@@ -42,7 +42,6 @@ const PostCard: React.FC<PostCardProps> = ({
     <Comment postId={_id} userData={userData} />
   ) : null;
 
-
   return (
     <Card className="w-full">
       <CardHeader className="justify-between">
@@ -68,9 +67,9 @@ const PostCard: React.FC<PostCardProps> = ({
         <Link
           href={
             !isPremium
-              ? `/${_id}`
+              ? `/post/${_id}`
               : isPremium && premium
-                ? `/${_id}`
+                ? `/post/${_id}`
                 : isPremium && !premium
                   ? "/login"
                   : "#"

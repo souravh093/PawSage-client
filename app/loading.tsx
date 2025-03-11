@@ -5,7 +5,7 @@ const Loading = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-opacity-30 bg-white backdrop-blur-lg rounded-lg shadow-lg">
       <Spinner size="lg" />
-      <span className="ml-4 text-xl font-semibold text-gray-700">
+      <span className="ml-4 text-xl font-semibold text-gray-700 dark:text-gray-300">
         Loading...
       </span>
     </div>

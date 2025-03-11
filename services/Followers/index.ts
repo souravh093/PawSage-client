@@ -39,11 +39,8 @@ export const checkFollowing = async (followerData: FieldValues) => {
       },
     });
 
-    console.log(data)
     return data;
   } catch (error: any) {
-    console.log(error);
     throw new Error(error.response?.data || error.message);
   }
 };
-

@@ -30,7 +30,7 @@ const ButtonGroup = ({
       navigator
         .share({
           title: "Check out this post!",
-          url: `${envConfig.baseClient}@feed/${postId}`,
+          url: `${envConfig.baseClient}/post/${postId}`,
           text: "I found this interesting post, take a look!",
         })
         .then(() => {

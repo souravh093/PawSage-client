@@ -14,6 +14,7 @@ export interface IInput {
   placeholder?: string;
   name: string;
   isDisabled?: boolean;
+  className?: string;
 }
 
 export type TRole = "admin" | "user";

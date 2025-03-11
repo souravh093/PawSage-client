@@ -15,6 +15,7 @@ const PWTextarea = ({
     placeholder,
     name,
     defaultValue,
+    className,
 }: IProps) => {
     const {register, formState: {errors}} = useFormContext();
   return (
@@ -28,6 +29,7 @@ const PWTextarea = ({
     {...register(name)}
     defaultValue={defaultValue}
     minRows={4}
+    className={className}
   />
 );
 };

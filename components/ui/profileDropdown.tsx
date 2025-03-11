@@ -24,7 +24,7 @@ export default function ProfileDropdown() {
     setLoading(true);
 
     if (protectedRoutes.some((route) => pathname.match(route))) {
-      router.push("/");
+      router.push("/login");
     }
   };
 

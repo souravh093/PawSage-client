@@ -19,6 +19,12 @@ const ProfilePage = async () => {
   const { data: myPosts } = await axiosInstance.get(`/posts/me`);
   const userInfo = await getUserData();
   const userData = await currentUser();
+  const { data: friendRequests } = await axiosInstance.get(
+    `/friends/list/${userData?.id}`
+  );
+
+  console.log(friendRequests);
+  console.log(userData?.id);
 
   return (
     <Container>
@@ -49,8 +55,11 @@ const ProfilePage = async () => {
             <div>
               <h1 className="font-bold text-2xl">{userInfo?.data?.name}</h1>
               <p>{userInfo?.data?.email}</p>
-              <h3>{followersCount?.data?.followerCount} followers</h3>
-              <h3>{followersCount?.data?.followingCount} following</h3>
+              <div className="flex gap-2">
+                <h3>{followersCount?.data?.followerCount} followers</h3>
+                <h3>{followersCount?.data?.followingCount} following</h3>
+                <h3>{friendRequests?.data?.length} Friends</h3>
+              </div>
             </div>
           </div>
 
@@ -127,6 +136,22 @@ const ProfilePage = async () => {
                       );
                     }
                   )
+                )}
+              </CardBody>
+            </Card>
+
+            <Card className="my-5">
+              <CardHeader>Friends</CardHeader>
+              <CardBody className="flex flex-col gap-2">
+                {friendRequests?.data.length < 1 ? (
+                  <h3>No friends</h3>
+                ) : (
+                  friendRequests?.data?.map((friend: any) => (
+                    <div key={friend._id} className="flex gap-2 items-center">
+                      <Avatar src={friend.userId.profilePicture} />
+                      <span>{friend.userId.name}</span>
+                    </div>
+                  ))
                 )}
               </CardBody>
             </Card>

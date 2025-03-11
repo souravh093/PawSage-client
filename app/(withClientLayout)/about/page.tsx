@@ -10,7 +10,7 @@ export default function AboutUs() {
       <div className="space-y-8">
         <section>
           <h3 className="text-xl font-medium mb-3">Our Story</h3>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             PawSage was founded by a group of dedicated pet enthusiasts with a
             shared vision: to create a comprehensive resource for pet owners
             that combines expert advice with heartwarming stories. Our platform
@@ -21,7 +21,7 @@ export default function AboutUs() {
 
         <section>
           <h3 className="text-xl font-medium mb-3">Our Mission</h3>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             PawSage, our mission is to empower pet owners with knowledge and
             inspiration, ensuring that every furry, feathered, or scaly friend
             receives the best care possible. We strive to strengthen the bond
@@ -32,7 +32,7 @@ export default function AboutUs() {
 
         <section>
           <h3 className="text-xl font-medium mb-3">Our Team</h3>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             Our team consists of experienced veterinarians, certified animal
             behaviorists, and passionate pet owners. This diverse group of
             experts collaborates to bring you accurate, up-to-date, and engaging
@@ -47,7 +47,7 @@ export default function AboutUs() {
 
         <section>
           <h3 className="text-xl font-medium mb-3">Our Vision</h3>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             We envision a world where every pet owner is equipped with the
             knowledge and inspiration to provide the best possible care for
             their animal companions. Through our platform, we aim to foster a
@@ -61,7 +61,7 @@ export default function AboutUs() {
 
       <Divider className="my-6" />
 
-      <footer className="text-center text-gray-600">
+      <footer className="text-center text-gray-600 dark:text-gray-400">
         <p>
           Join us in our commitment to enhancing the lives of pets and their
           human companions through education, inspiration, and community.

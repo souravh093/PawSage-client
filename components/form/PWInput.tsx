@@ -17,13 +17,14 @@ const PWInput = ({
   defaultValue,
   isDisabled,
   name,
+  className,
 }: IProps) => {
   const {
     register,
     formState: { errors },
   } = useFormContext();
 
-  return (
+  return (  
     <Input
       variant={variant}
       size={size}
@@ -36,6 +37,7 @@ const PWInput = ({
       defaultValue={defaultValue}
       label={label}
       placeholder={placeholder}
+      className={className}
     />
   );
 };

@@ -15,7 +15,6 @@ import { Skeleton } from "@nextui-org/skeleton";
 import { Pagination } from "@nextui-org/pagination";
 import { Badge } from "@nextui-org/badge";
 import { BadgeCheck, Delete, Trash2 } from "lucide-react";
-import { Button } from "@nextui-org/button";
 import DeletePostModal from "@/components/shared/modal/DeletePostModal";
 import CreatePostModal from "@/components/shared/modal/CreatePostModal";
 import { useUser } from "@/context/user.provider";

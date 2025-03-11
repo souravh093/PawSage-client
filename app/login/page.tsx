@@ -14,7 +14,7 @@ import PWInput from "@/components/form/PWInput";
 import { useLogin } from "@/hooks/auth.hook";
 import { Spinner } from "@nextui-org/spinner";
 import { useUser } from "@/context/user.provider";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import ForgetPassword from "@/components/shared/modal/ForgetPassword";
 
 const Login = () => {
@@ -41,6 +41,17 @@ const Login = () => {
     }
   }
 
+  const defaultCredentials = {
+    user: { email: "normal@gmail.com", password: "password" },
+    admin: { email: "example@gmail.com", password: "password" },
+  };
+
+  const handleAutoFill = (role: "user" | "admin") => {
+    const credentials = defaultCredentials[role];
+    methods.setValue("email", credentials.email);
+    methods.setValue("password", credentials.password);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-green-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -52,10 +63,24 @@ const Login = () => {
             <h2 className="text-2xl font-semibold text-gray-700 text-center mb-6 uppercase">
               Welcome Back!
             </h2>
+
+            <div className="flex justify-center gap-4 my-4">
+              <Button type="button" onClick={() => handleAutoFill("user")}>
+                Autofill User
+              </Button>
+              <Button
+                type="button"
+                onClick={() => handleAutoFill("admin")}
+                className="bg-blue-500"
+              >
+                Autofill Admin
+              </Button>
+            </div>
             <FormProvider {...methods}>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-2">
                   <PWInput
+                    className="dark:text-gray-800"
                     name="email"
                     type="email"
                     placeholder="your@email.com"
@@ -65,6 +90,7 @@ const Login = () => {
                 </div>
                 <div className="space-y-2">
                   <PWInput
+                    className="dark:text-gray-800"
                     label="Password"
                     name="password"
                     type="password"
@@ -80,7 +106,7 @@ const Login = () => {
               </form>
             </FormProvider>
             <div className="mt-4 text-center">
-             <ForgetPassword />
+              <ForgetPassword />
             </div>
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
