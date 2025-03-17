@@ -1,13 +1,14 @@
 "use client";
 import { Trash2 } from "lucide-react";
 import React from "react";
-import { Tooltip } from "@nextui-org/tooltip";
+
 import { Button } from "@nextui-org/button";
 import { useDeleteComment } from "@/hooks/comment.hook";
 import { Spinner } from "@nextui-org/spinner";
 import { TPostComment } from "@/types/comment.interface";
 import { useUser } from "@/context/user.provider";
 import EditCommentModal from "../shared/modal/EditCommentModal";
+import { Tooltip } from "@heroui/tooltip";
 
 const EditComment = ({ comment }: { comment: TPostComment }) => {
   const { user } = useUser();
